@@ -29,13 +29,13 @@ body {
     border-radius: 12px;
 }
 
-.login-form h1 {
+.login-form h2 {
     font-size: 30px;
     margin-bottom: 60px;
     position: relative;
 }
 /* Add line below h1 */
-.login-form h1::after {
+.login-form h2::after {
     background: black;
     content: "";
     width: 30px;
