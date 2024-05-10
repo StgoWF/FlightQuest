@@ -71,11 +71,10 @@ console.log('Session middleware configured.');
 app.use(express.static('public'));
 
 // Import routes
-const authRoutes = require('./routes/authRoutes');
-const tripRoutes = require('./controllers/tripController');
+const homeRoutes = require('./controllers/homeRoutes');
 
-app.use(authRoutes);
-app.use(tripRoutes);
+app.use(homeRoutes);
+
 
 // Start the server
 app.listen(PORT, async () => {
