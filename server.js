@@ -7,10 +7,10 @@ const { engine } = require('express-handlebars');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const Sequelize = require('sequelize');
-const config = require('./config/config'); 
+const config = require('./config/config');
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3002;
 
 // Define the environment based on NODE_ENV or default to 'development'
 const env = process.env.NODE_ENV || 'development';
@@ -71,8 +71,11 @@ console.log('Session middleware configured.');
 app.use(express.static('public'));
 
 // Import routes
-const routes = require('./controllers/routes');  // Ensure you have this file and folder structure set up
-app.use(routes);
+const authRoutes = require('./routes/authRoutes');
+const tripRoutes = require('./controllers/tripController');
+
+app.use(authRoutes);
+app.use(tripRoutes);
 
 // Start the server
 app.listen(PORT, async () => {
