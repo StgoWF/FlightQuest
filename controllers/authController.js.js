@@ -2,7 +2,6 @@ const UserModel = require('../models/User');
 
 exports.login = async (req, res) => {
     try {
-        // Lógica para verificar las credenciales del usuario
         const user = await UserModel.find(req.body.username, req.body.password);
         if (user) {
             req.session.user = user;
