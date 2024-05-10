@@ -27,6 +27,6 @@ module.exports = {
         rejectUnauthorized: false  // Necessary for secure database connections
       }
     },
-    logging: false  // Disable SQL query logging to clean up console output
+    logging: true  // Disable SQL query logging to clean up console output
   }
 };
