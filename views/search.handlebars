@@ -1,0 +1,65 @@
+<aside class="search-panel">
+    <h2>Book a Flight</h2>
+    <div class="input-group">
+        <label for="trip-type">Trip Type</label>
+        <select id="trip-type">
+            <option value="oneway">One-way</option>
+            <option value="roundtrip">Roundtrip</option>
+            <option value="multicity">Multi-city (coming soon!)</option>
+        </select>
+    </div>
+    <div class="input-group">
+        <label for="from">From</label>
+        <input type="text" id="from" placeholder="Enter departure city">
+    </div>
+    <div class="input-group">
+        <label for="to">To</label>
+        <input type="text" id="to" placeholder="Enter destination city">
+    </div>
+    <div class="input-group">
+        <label for="depart-date">Depart Date</label>
+        <input type="date" id="depart-date">
+    </div>
+    <div class="input-group" id="return-date-group">
+        <label for="return-date">Return Date</label>
+        <input type="date" id="return-date">
+    </div>
+    <div id="multi-city-container"></div>
+    <div class="input-group" id="passengerDropdownHolder">
+        <label for="passengerDropdown">Passengers</label>
+        <button id="passengerDropdown" class="passenger-btn">Select Passengers</button>
+        <div class="passenger-dropdown-content" id="passengerDropdownContent" style="display:none;">
+            <div class="passenger-count">
+                <label for="adults">Adults</label>
+                <button type="button" class="quantity-btn decrease">-</button>
+                <input type="number" id="adults" value="1" min="1" readonly>
+                <button type="button" class="quantity-btn increase">+</button>
+            </div>
+            <div class="passenger-count">
+                <label for="children">Children</label>
+                <button type="button" class="quantity-btn decrease">-</button>
+                <input type="number" id="children" value="0" min="0" readonly>
+                <button type="button" class="quantity-btn increase">+</button>
+            </div>
+            <div class="passenger-count">
+                <label for="infants">Infants</label>
+                <button type="button" class="quantity-btn decrease">-</button>
+                <input type="number" id="infants" value="0" min="0" readonly>
+                <button type="button" class="quantity-btn increase">+</button>
+            </div>
+        </div>
+    </div>
+    <div class="input-group">
+        <label for="class">Class</label>
+        <select id="class">
+            <option value="economy">Economy</option>
+            <option value="premium_economy">Premium Economy</option>
+            <option value="business">Business</option>
+            <option value="first_class">First Class</option>
+        </select>
+    </div>
+    <button type="submit" class="search-btn">Search Flights</button>
+</aside>
+<main class="content-panel">
+    <!-- Content here will be dynamically loaded based on search results -->
+</main>
