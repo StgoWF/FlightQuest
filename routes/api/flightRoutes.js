@@ -3,10 +3,10 @@ const { Flight } = require('../../models');
 const FlightAPI = require('../../api/flightAPI');
 
 router.post('/', async (req, res) => {
-    if (!req.session.userId) return res.status(401).json({ message: 'Unauthorized' });
+    if (!req.session.user_id) return res.status(401).json({ message: 'Unauthorized' });
     const { flightNumber, destination } = req.body;
     try {
-        const flight = await Flight.create({ flightNumber, destination, userId: req.session.userId });
+        const flight = await Flight.create({ flightNumber, destination, userId: req.session.user_id });
         res.status(201).json(flight);
     } catch (error) {
         res.status(500).json(error);
@@ -14,9 +14,9 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
-    if (!req.session.userId) return res.status(401).json({ message: 'Unauthorized' });
+    if (!req.session.user_id) return res.status(401).json({ message: 'Unauthorized' });
     try {
-        const flights = await Flight.findAll({ where: { userId: req.session.userId } });
+        const flights = await Flight.findAll({ where: { userId: req.session.user_id } });
         res.status(200).json(flights);
     } catch (error) {
         res.status(500).json(error);

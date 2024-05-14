@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const config = require('../config/config');
-const UserModel = require('./User');
+const UserModel = require('./user');
+const FlightModel = require('./flight');
 const TripModel = require('./trip');
 
 // Determine the environment and load the appropriate configuration
@@ -52,12 +53,16 @@ function logDatabaseConnectionStatus() {
 logDatabaseConnectionStatus();
 
 // Import models
-const User = require('./User')(sequelize, Sequelize);
-const Trip = require('./trip')(sequelize, Sequelize);
+const User = UserModel(sequelize, Sequelize);
+const Flight = FlightModel(sequelize, Sequelize);
+const Trip = TripModel(sequelize, Sequelize);
 
 console.log('Models imported successfully');  // Log successful model importation
 
 // Define relationships between models
+User.hasMany(Flight, { foreignKey: 'userId' });
+Flight.belongsTo(User, { foreignKey: 'userId' });
+
 User.hasMany(Trip, { foreignKey: 'userId' });
 Trip.belongsTo(User, { foreignKey: 'userId' });
 
@@ -67,5 +72,6 @@ console.log('Model relationships defined successfully');  // Log successful rela
 module.exports = {
   sequelize,
   User,
+  Flight,
   Trip
 };
