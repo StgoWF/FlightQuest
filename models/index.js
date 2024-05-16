@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const config = require('../config/config');
 const UserModel = require('./user');
-const FlightModel = require('./flight');
+const FlightModel = require('./flightapi');
 const TripModel = require('./trip');
 
 // Determine the environment and load the appropriate configuration

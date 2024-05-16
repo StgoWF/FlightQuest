@@ -72,7 +72,7 @@ sess.store.sync().catch(err => {
 app.use(session(sess));
 console.log('Session middleware configured.');
 
-const homeRoutes = require('./routes/homeRoutes');
+const homeRoutes = require('./controllers/homeRoutes');
 const authRoutes = require('./routes/authRoutes');
 const flightRoutes = require('./routes/api/flightRoutes');
 const tripRoutes = require('./routes/api/tripRoutes');

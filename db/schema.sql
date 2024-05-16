@@ -1,5 +1,6 @@
 -- Drop the table if it exists (optional, use only if needed)
 DROP TABLE IF EXISTS trip;
+DROP TABLE IF EXISTS flights;
 DROP TABLE IF EXISTS users;
 
 

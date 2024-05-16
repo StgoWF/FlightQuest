@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Flight } = require('../../models');
-const FlightAPI = require('../../api/flightAPI');
+const FlightAPI = require('../../models/flightapi');
 
 router.post('/', async (req, res) => {
     if (!req.session.user_id) return res.status(401).json({ message: 'Unauthorized' });
