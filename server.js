@@ -89,11 +89,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Use defined routes
 app.use(homeRoutes);
 
-// Route for the home page
-app.get('/', (req, res) => {
-    console.log('Handling GET request for the home page');
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+
 
 // Start the server
 app.listen(PORT, async () => {

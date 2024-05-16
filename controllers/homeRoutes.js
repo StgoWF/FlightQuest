@@ -1,8 +1,10 @@
 // Import required modules
 const express = require('express');
 const bcrypt = require('bcrypt');
-const { User, Trip } = require('../models'); // Assuming User is the model for your users
+const { User, Trip } = require('../models');
 const router = express.Router();
+const FlightAPI = require('../models/flightapi');
+
 
 
 // Route to handle the root URL
@@ -79,6 +81,18 @@ router.post('/logout', (req, res) => {
     req.session.destroy(() => {
         res.redirect('/login');
     });
+});
+
+// Handle the GET request for searching flights
+router.get('/search-flights', async (req, res) => {
+    const { fromId, toId, departDate } = req.query;
+    try {
+        const flightResults = await FlightAPI.searchFlights(fromId, toId, departDate);
+        res.json(flightResults);  // Assuming flightResults is the correct response format you expect
+    } catch (error) {
+        console.error('Error fetching flight data:', error);
+        res.status(500).json({ error: 'Failed to fetch flights' });
+    }
 });
 
 // Export the router

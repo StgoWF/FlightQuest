@@ -1,5 +1,7 @@
 -- Drop the table if it exists (optional, use only if needed)
+DROP TABLE IF EXISTS trip;
 DROP TABLE IF EXISTS users;
+
 
 -- Create the users table
 CREATE TABLE users (
@@ -9,7 +11,6 @@ CREATE TABLE users (
 );
 
 -- Drop the table if it exists (optional, use only if needed)
-DROP TABLE IF EXISTS trip;
 
 -- Create the trip table
 CREATE TABLE trip (
