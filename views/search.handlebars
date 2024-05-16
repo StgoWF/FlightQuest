@@ -135,10 +135,22 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(results);
         const container = document.getElementById('resultsContainer');
         container.innerHTML = '';
-        if (results.status && results.data && Array.isArray(results.data.flights)) {
-            results.data.flights.forEach(flight => {
+
+        // Verify the structure of results.data.flightOffers
+        if (results.status && results.data && results.data.flightOffers && Array.isArray(results.data.flightOffers)) {
+            results.data.flightOffers.forEach(flight => {
+                // Log the flight object for debugging
+                console.log(flight);
+
+                // Extract relevant details
+                const segments = flight.segments[0];
+                const departureAirport = segments.departureAirport.code;
+                const arrivalAirport = segments.arrivalAirport.code;
+                const price = flight.priceBreakdown.total.units;
+
+                // Create an element to display flight details
                 const element = document.createElement('div');
-                element.textContent = `Flight from ${flight.from} to ${flight.to} - Price: $${flight.price}`;
+                element.textContent = `Flight from ${departureAirport} to ${arrivalAirport} - Price: $${price}`;
                 container.appendChild(element);
             });
         } else {
@@ -147,5 +159,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+
 
 
