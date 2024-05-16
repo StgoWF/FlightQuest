@@ -1,25 +1,29 @@
-const fetch = require('node-fetch');
+const { Model, DataTypes } = require('sequelize');
 
-class FlightAPI {
-    static async searchFlights(fromId, toId, departDate) {
-        const url = `https://booking-com15.p.rapidapi.com/api/v1/flights/searchFlights?fromId=${fromId}&toId=${toId}&departDate=${departDate}`;
-        const options = {
-            method: 'GET',
-            headers: {
-                'X-RapidAPI-Key': 'YOUR_API_KEY',
-                'X-RapidAPI-Host': 'booking-com15.p.rapidapi.com'
+module.exports = (sequelize) => {
+    class Flight extends Model {}
+
+    Flight.init({
+        flightNumber: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        destination: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        userId: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'users',
+                key: 'id'
             }
-        };
-
-        try {
-            const response = await fetch(url, options);
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            console.error('Error fetching flight data:', error);
-            throw error;
         }
-    }
-}
+    }, {
+        sequelize,
+        modelName: 'Flight',
+        timestamps: false
+    });
 
-module.exports = FlightAPI;
+    return Flight;
+};
