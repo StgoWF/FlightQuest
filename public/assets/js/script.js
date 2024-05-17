@@ -1,4 +1,24 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Handle the signup and login messages
+    const urlParams = new URLSearchParams(window.location.search);
+    const signupSuccess = urlParams.get('signup');
+    const loginSuccess = urlParams.get('login');
+    const signupError = urlParams.get('signupError');
+    const loginError = urlParams.get('loginError');
+
+    if (signupSuccess === 'success') {
+        alert('Signup successful! Please log in.');
+    } else if (signupError) {
+        alert('Signup failed: ' + signupError);
+    }
+
+    if (loginSuccess === 'success') {
+        alert('Login successful!');
+    } else if (loginError) {
+        alert('Login failed: ' + loginError);
+    }
+
+    // Other script content...
     var tripTypeSelector = document.getElementById('trip-type');
     var multiCityContainer = document.getElementById('multi-city-container');
 

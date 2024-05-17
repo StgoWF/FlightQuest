@@ -51,8 +51,8 @@ const authRoutes = require('./controllers/authRoutes');
 const flightRoutes = require('./controllers/flightRoutes');
 const tripRoutes = require('./controllers/tripRoutes');
 // Use routes
-app.use('/', homeRoutes); // Root URL will be handled by homeRoutes
-app.use('/auth', authRoutes); // Routes related to authentication will be under /auth
+app.use(homeRoutes);
+app.use(authRoutes);
 app.use('/api/flights', flightRoutes); // Routes related to flights will be under /api/flights
 app.use('/api/trips', tripRoutes); // Routes related to trips will be under /api/trips
 
