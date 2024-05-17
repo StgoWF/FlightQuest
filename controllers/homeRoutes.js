@@ -1,6 +1,5 @@
 // Import required modules
 const express = require('express');
-const bcrypt = require('bcrypt');
 const { User, Trip } = require('../models');
 const router = express.Router();
 const FlightAPI = require('../models/flightapi');
@@ -17,14 +16,9 @@ router.get('/login', (req, res) => {
 
 // Handle login logic
 router.post('/login', async (req, res) => {
-    console.log('Login request:', req.body);
     try {
         const user = await User.findOne({ where: { username: req.body.username } });
-        console.log('User:', user);
-        console.log(req.body.password);
-        console.log(user.checkPassword(req.body.password));
         if (user && user.checkPassword(req.body.password)) {
-            console.log('Login successful');
             req.session.user_id = user.id;
             req.session.logged_in = true;
             res.redirect('/search');
@@ -49,9 +43,11 @@ router.post('/signup', async (req, res) => {
             username: req.body.username,
             password: req.body.password // Hash password before saving
         });
+        req.session.save(() => {
         req.session.user_id = newUser.id;
         req.session.logged_in = true;
         res.redirect('/search');
+        });
     } catch (error) {
         res.render('signup', { error: 'Error creating user', layout: 'main' });
     }
