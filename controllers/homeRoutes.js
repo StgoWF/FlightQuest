@@ -17,9 +17,14 @@ router.get('/login', (req, res) => {
 
 // Handle login logic
 router.post('/login', async (req, res) => {
+    console.log('Login request:', req.body);
     try {
         const user = await User.findOne({ where: { username: req.body.username } });
-        if (user && await bcrypt.compare(req.body.password, user.password)) {
+        console.log('User:', user);
+        console.log(req.body.password);
+        console.log(user.checkPassword(req.body.password));
+        if (user && user.checkPassword(req.body.password)) {
+            console.log('Login successful');
             req.session.user_id = user.id;
             req.session.logged_in = true;
             res.redirect('/search');
@@ -27,6 +32,7 @@ router.post('/login', async (req, res) => {
             res.render('login', { error: 'Invalid username or password', layout: 'main' });
         }
     } catch (error) {
+        console.error(error);
         res.status(500).render('login', { error: 'Server error during authentication', layout: 'main' });
     }
 });
@@ -41,7 +47,7 @@ router.post('/signup', async (req, res) => {
     try {
         const newUser = await User.create({
             username: req.body.username,
-            password: await bcrypt.hash(req.body.password, 10) // Hash password before saving
+            password: req.body.password // Hash password before saving
         });
         req.session.user_id = newUser.id;
         req.session.logged_in = true;

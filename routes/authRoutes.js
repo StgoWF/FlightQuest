@@ -30,6 +30,7 @@ router.post('/login', async (req, res) => {
             res.render('login', { error: 'Invalid username or password', layout: 'main' });
         }
     } catch (error) {
+        console.log(error);
         res.status(500).render('login', { error: 'Server error during authentication', layout: 'main' });
     }
 });

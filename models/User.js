@@ -31,7 +31,7 @@ module.exports = (sequelize) => {
             }
         },
         sequelize,
-        modelName: 'User',
+        modelName: 'users',
         timestamps: false
     });
 
