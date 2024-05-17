@@ -29,7 +29,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const sess = {
-    secret: process.env.SESSION_SECRET || 'TechBlog secret',
+    secret:'FlightQuest secret',
     cookie: {},
     store: new SequelizeStore({
         db: sequelize,
@@ -47,13 +47,15 @@ app.use(session(sess));
 console.log('Session middleware configured.');
 
 const homeRoutes = require('./controllers/homeRoutes');
-const authRoutes = require('./routes/authRoutes');
-const flightRoutes = require('./routes/api/flightRoutes');
-const tripRoutes = require('./routes/api/tripRoutes');
-app.use(homeRoutes);
-app.use(authRoutes);
-app.use('/api/flights', flightRoutes);
-app.use('/api/trips', tripRoutes);
+const authRoutes = require('./controllers/authRoutes');
+const flightRoutes = require('./controllers/flightRoutes');
+const tripRoutes = require('./controllers/tripRoutes');
+// Use routes
+app.use('/', homeRoutes); // Root URL will be handled by homeRoutes
+app.use('/auth', authRoutes); // Routes related to authentication will be under /auth
+app.use('/api/flights', flightRoutes); // Routes related to flights will be under /api/flights
+app.use('/api/trips', tripRoutes); // Routes related to trips will be under /api/trips
+
 
 app.use(express.static(path.join(__dirname, '/public')));
 

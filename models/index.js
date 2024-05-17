@@ -16,16 +16,14 @@ if (dbConfig.use_env_variable) {
     });
 }
 
-// Log the connection status
-
-const User = UserModel(sequelize, Sequelize);
-const Trip = TripModel(sequelize, Sequelize);
+const User = UserModel(sequelize);
+const Trip = TripModel(sequelize);
 
 User.hasMany(Trip, { foreignKey: 'userId' });
 Trip.belongsTo(User, { foreignKey: 'userId' });
 
 module.exports = {
-  sequelize,
-  User,
-  Trip
+    sequelize,
+    User,
+    Trip
 };
