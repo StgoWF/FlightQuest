@@ -105,7 +105,7 @@ router.post('/api/save-flight', async (req, res) => {
     try {
         const { fromCity, toCity, departDate, returnDate, passengersAdults, passengersChildren, passengersInfants, travelClass, airlineCode, flightDuration, price } = req.body;
         const newTrip = await Trip.create({
-            userId: req.session.user_id,
+            userId: req.session.userId,
             fromCity,
             toCity,
             departDate,
