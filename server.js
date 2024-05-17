@@ -55,7 +55,7 @@ app.use(authRoutes);
 app.use('/api/flights', flightRoutes);
 app.use('/api/trips', tripRoutes);
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public')));
 
 app.get('/', (req, res) => {
     res.render('search', { logged_in: req.session.logged_in });
