@@ -1,13 +1,11 @@
-// Server.js
+// server.js
 console.log('Starting server...');
 require('dotenv').config();
+
 if (!process.env.NODE_ENV) {
     process.env.NODE_ENV = 'production';
 }
 console.log("Environment:", process.env.NODE_ENV);
-
-
-
 
 const path = require('path');
 const express = require('express');
@@ -15,93 +13,61 @@ const { engine } = require('express-handlebars');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const Sequelize = require('sequelize');
-const config = require('./config/config'); 
+const config = require('./config/config');
+const { sequelize, User, Flight, Trip } = require('./models'); // Ensure all models are imported
 
 const app = express();
 const PORT = process.env.PORT || 3002;
 
-
-// Define the environment based on NODE_ENV or default to 'development'
 const env = process.env.NODE_ENV || 'development';
 console.log("Environment:", env);
-
-// Initialize Sequelize based on the environment
-let sequelize;
-if (env === 'production') {
-    console.log("Using JAWSDB_URL for production database connection.");
-    sequelize = new Sequelize(process.env.JAWSDB_URL, {
-        dialect: 'mysql',
-        dialectOptions: {
-            ssl: {
-                require: true,
-                rejectUnauthorized: false  // Necessary for secure database connections
-            }
-        },
-        logging: true // Enable logging for debugging SQL queries
-    });
-} else {
-    console.log("Using local database configuration.");
-    sequelize = new Sequelize(config[env].database, config[env].username, config[env].password, {
-        host: config[env].host,
-        dialect: 'mysql',
-        logging: true // Enable logging for debugging SQL queries
-    });
-}
-
-// Test the database connection
-sequelize.authenticate()
-    .then(() => console.log('Connection has been established successfully.'))
-    .catch(error => console.error('Unable to connect to the database:', error));
 
 app.engine('handlebars', engine({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
-// Middleware for handling JSON and URL-encoded data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Session configuration
 const sess = {
-    secret: process.env.SESSION_SECRET || 'TechBlog secret', // Ensure this is set in your .env file or hardcoded safely
+    secret:'FlightQuest secret',
     cookie: {},
     store: new SequelizeStore({
         db: sequelize,
-        checkExpirationInterval: 15 * 60 * 1000, // The interval at which to cleanup expired sessions
-        expiration: 24 * 60 * 60 * 1000 // The expiration time for sessions
+        checkExpirationInterval: 15 * 60 * 1000,
+        expiration: 24 * 60 * 60 * 1000
     }),
     resave: false,
     saveUninitialized: true
 };
 
-// Error handling for SequelizeStore setup
 sess.store.sync().catch(err => {
     console.error('Error setting up session store:', err);
 });
 app.use(session(sess));
 console.log('Session middleware configured.');
 
-// Import routes
 const homeRoutes = require('./controllers/homeRoutes');
-
-// Middleware to serve static files
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Use defined routes
+const authRoutes = require('./controllers/authRoutes');
+const flightRoutes = require('./controllers/flightRoutes');
+const tripRoutes = require('./controllers/tripRoutes');
+// Use routes
 app.use(homeRoutes);
+app.use(authRoutes);
+app.use('/api/flights', flightRoutes); // Routes related to flights will be under /api/flights
+app.use('/api/trips', tripRoutes); // Routes related to trips will be under /api/trips
 
-// Route for the home page
+
+app.use(express.static(path.join(__dirname, '/public')));
+
 app.get('/', (req, res) => {
-    console.log('Handling GET request for the home page');
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.render('search', { logged_in: req.session.logged_in });
+});
+sequelize.sync({ force: false }).then(() => {
+    console.log('Database tables created or updated!');
+    app.listen(PORT, async () => {
+        console.log(`Server listening on http://localhost:${PORT}`);
+    });
+}).catch(error => {
+    console.error('Failed to sync database:', error);
 });
 
-// Start the server
-app.listen(PORT, async () => {
-    console.log(`Server listening on http://localhost:${PORT}`);
-    try {
-        await sequelize.sync({ force: false }); // Sync models with DB, create tables if they don't exist
-        console.log('Database tables created or updated!');
-    } catch (error) {
-        console.error('Failed to sync database:', error);
-    }
-});

@@ -1,0 +1,18 @@
+<div class="saved-flights-container">
+    <h1>Saved Flights</h1>
+
+    <!-- List of saved flights -->
+    <ul>
+            {{#each flights}}
+                <li>
+                    From {{fromCity}} to {{toCity}} <br>
+                    Departure Date: {{departDate}} <br>
+                    Return Date: {{returnDate}} <br>
+                    Class: {{travelClass}} <br>
+                    Airline: {{airlineCode}} <br>
+                    Duration: {{flightDuration}} <br>
+                    Price: ${{price}}
+                </li>
+            {{/each}}
+    </ul>
+</div>

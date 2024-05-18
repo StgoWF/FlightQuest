@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 
-module.exports = (sequelize) => { 
+module.exports = (sequelize) => {
     class Trip extends Model {}
 
     Trip.init({
@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'user',
+                model: 'users',  
                 key: 'id'
             }
         },
@@ -58,15 +58,16 @@ module.exports = (sequelize) => {
             allowNull: true
         },
         price: {
-            type: DataTypes.DECIMAL(10,2),
+            type: DataTypes.DECIMAL(10, 2),
             allowNull: true
         }
     }, {
-        sequelize, 
+        sequelize,
         timestamps: true,
         freezeTableName: true,
         underscored: true,
-        modelName: 'trip'
+        modelName: 'trip',  
+        tableName: 'trips' 
     });
 
     return Trip;
