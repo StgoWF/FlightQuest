@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FlightQuest</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 <body>
     <header>
-        <nav>
-            <ul>
+        <h1>FlightQuest</h1>
+        <nav id="nav">    
+            <ul class="nav_links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/dashboard">Dashboard</a></li>
                 {{#if logged_in}}
@@ -19,7 +20,7 @@
                 {{/if}}
             </ul>
         </nav>
-        <h1>FlightQuest</h1>
+        
     </header>
 
     {{{body}}}
