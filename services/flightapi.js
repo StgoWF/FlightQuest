@@ -8,7 +8,7 @@ class FlightAPI {
         const options = {
             method: 'GET',
             headers: {
-                'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,  // Ensure your API key is stored in .env for security
+                'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,  
                 'X-RapidAPI-Host': 'booking-com15.p.rapidapi.com'
             }
         };
