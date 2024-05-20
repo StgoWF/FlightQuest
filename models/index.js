@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const config = require('../config/config');
 const UserModel = require('./user');
 const TripModel = require('./trip');
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'production';
 const dbConfig = config[env];
 let sequelize;
 
