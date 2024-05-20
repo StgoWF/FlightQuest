@@ -14,6 +14,7 @@ const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const Sequelize = require('sequelize');
 const config = require('./config/config');
+const methodOverride = require('method-override'); 
 const { sequelize, User, Flight, Trip } = require('./models'); // Ensure all models are imported
 
 const app = express();
@@ -27,6 +28,9 @@ app.set('view engine', 'handlebars');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Add method-override middleware
+app.use(methodOverride('_method'));
 
 const sess = {
     secret:'FlightQuest secret',
@@ -62,6 +66,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.get('/', (req, res) => {
     res.render('search', { logged_in: req.session.logged_in });
 });
+
 sequelize.sync({ force: false }).then(() => {
     console.log('Database tables created or updated!');
     app.listen(PORT, async () => {

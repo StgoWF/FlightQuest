@@ -8,7 +8,7 @@ class FlightAPI {
         const options = {
             method: 'GET',
             headers: {
-                'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,  // Ensure your API key is stored in .env for security
+                'X-RapidAPI-Key': '8d3728dcaemsh32efdac6013419ap12f34bjsned7b35d9a858',  
                 'X-RapidAPI-Host': 'booking-com15.p.rapidapi.com'
             }
         };
@@ -36,7 +36,7 @@ class FlightAPI {
         const options = {
             method: 'GET',
             headers: {
-                'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,
+                'X-RapidAPI-Key': '8d3728dcaemsh32efdac6013419ap12f34bjsned7b35d9a858',
                 'X-RapidAPI-Host': 'booking-com15.p.rapidapi.com'
             }
         };

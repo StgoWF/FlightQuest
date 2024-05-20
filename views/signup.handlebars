@@ -3,17 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
-    <link rel="stylesheet" href="assets/css/signup.css"> <!-- Link to your CSS file -->
+    <script src="https://kit.fontawesome.com/c5a5901191.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/assets/css/signup.css"> <!-- Link to your CSS file -->
 </head>
-    <div class="login-form">
-        <h2 class="login-title">Sign Up</h2>
-        <form method="POST" action="/signup">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <input type="confirm-password" name="confirm-password" placeholder="Confirm Username" required>
-            <button type="submit">Sign Up</button>
-        </form>
-        <a href="/login" class="sign-up-link">Login instead</a>
+<body>
+    <div class="main">
+        <div class="login-form" id="main">
+            <h2 class="login-title">Sign Up</h2>
+            <form method="POST" action="/signup">
+                <div class="input-field">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" name="username" placeholder="Username" required>
+                </div>
+                <div class="input-field">
+                    <i class="fa-solid fa-key"></i>
+                <input type="password" name="password" placeholder="Password" required>
+                </div>
+                <button type="submit">Sign Up</button>
+            </form>
+            <label>Already a member?</label>
+            <a href="/login" id="login_link">Login instead</a>
+        </div>
     </div>
     <script src="/assets/js/script.js"></script>
 </body>

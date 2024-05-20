@@ -8,8 +8,9 @@
 </head>
 <body data-logged-in="{{#if logged_in}}true{{else}}false{{/if}}">
     <header>
-        <nav>
-            <ul>
+        <h1>FlightQuest</h1>
+        <nav id="nav">    
+            <ul class="nav_links">
                 <li><a href="/">Home</a></li>
                 {{#if logged_in}}
                 <li><a href="/saved-flights">Saved Flights</a></li>
@@ -19,7 +20,7 @@
                 {{/if}}
             </ul>
         </nav>
-        <h1>FlightQuest</h1>
+        
     </header>
 
     {{{body}}}

@@ -9,12 +9,15 @@ body {
 
 header {
     width: 100vw;
-    height: 15%;
+    height: 5%;
+    background-color: darkslateblue;
 }
 
 header h1 {
     display: inline-block;
     margin: 0 25px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: whitesmoke;
 }
 
 header nav {
@@ -33,6 +36,7 @@ header nav li {
 
 header nav li a {
     text-decoration: none;
+    color: whitesmoke;
 }
 
 * {

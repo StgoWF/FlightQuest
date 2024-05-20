@@ -5,15 +5,17 @@
     <!-- List of saved flights -->
     <ul>
             {{#each flights}}
-                <li>
-                    From {{fromCity}} to {{toCity}} <br>
-                    Departure Date: {{departDate}} <br>
-                    Return Date: {{returnDate}} <br>
-                    Class: {{travelClass}} <br>
-                    Airline: {{airlineCode}} <br>
-                    Duration: {{flightDuration}} <br>
-                    Price: ${{price}}
-                </li>
+            <li>
+                From {{fromCity}} to {{toCity}} <br>
+                Departure Date: {{departDate}} {{departureTime}}<br> <!-- Adding departure time -->
+                Return Date: {{returnDate}} <br>
+                Class: {{travelClass}} <br>
+                Airline: {{airlineCode}} <br>
+                Duration: {{flightDuration}} <br>
+                Price: ${{price}} <br>
+                <button class="delete-button" data-id="{{id}}">Delete</button>
+                <button class="update-button" data-id="{{id}}">Update</button>
+            </li>
             {{/each}}
     </ul>
     <script src="/assets/js/script.js"></script>
