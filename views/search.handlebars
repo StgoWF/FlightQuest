@@ -30,23 +30,23 @@
         <div class="input-group" id="passengerDropdownHolder">
             <label for="passengerDropdown">Passengers</label>
             <button type="button" id="passengerDropdown" class="passenger-btn">Select Passengers</button>
-            <div class="passenger-dropdown-content" id="passengerDropdownContent" style="display:none;">
+            <div class="passenger-dropdown-content" id="passengerDropdownContent">
                 <div class="passenger-count">
-                    <label for="adults">Adults</label>
-                    <button type="button" class="quantity-btn decrease">-</button>
-                    <input type="number" id="adults" name="adults" value="1" min="1" readonly>
-                    <button type="button" class="quantity-btn increase">+</button>
+                    <label for="adult">Adults</label>
+                    <button onclick="quantityBtn(-1)">-</button>
+                    <span id="adults">0</span>
+                    <button onclick="quantityBtn(1)">+</button>
                 </div>
                 <div class="passenger-count">
                     <label for="children">Children</label>
-                    <button type="button" class="quantity-btn decrease">-</button>
-                    <input type="number" id="children" name="children" value="0" min="0" readonly>
-                    <button type="button" class="quantity-btn increase">+</button>
+                    <button onclick="quantityBtn(-1)">-</button>
+                    <span id="children">0</span>
+                    <button onclick="quantityBtn(1)">+</button>
                 </div>
                 <div class="passenger-count">
                     <label for="infants">Infants</label>
                     <button type="button" class="quantity-btn decrease">-</button>
-                    <input type="number" id="infants" name="infants" value="0" min="0" readonly>
+                    <span id="infants">0</span>
                     <button type="button" class="quantity-btn increase">+</button>
                 </div>
             </div>
@@ -64,6 +64,6 @@
     </form>
 </aside>
 <main class="content-panel">
-    <script src="/assets/js/script.js"></script>
+    <script src="assets/js/script.js"></script>
     <div id="resultsContainer"></div>
 </main>

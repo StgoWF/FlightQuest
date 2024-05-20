@@ -58,9 +58,6 @@ aside {
     margin: 0;
     padding: 0;
     background-color: #c8dadb;
-}
-
-form {
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -68,6 +65,16 @@ form {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+}
+
+form {
+   /* height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: url("../images/background2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center; */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -99,7 +106,13 @@ form {
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /*
+    background-image: url('assets/images/background2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center; 
+    height: 100vh; 
+    width: 100vw;  */
 }
 
 .number-selector {
@@ -190,3 +203,21 @@ form {
         display: flex;
     }
 }
+
+
+/* Media queries for responsiveness *
+@media (max-width: 768px) {
+    * {
+        background-size: contain;
+        background-position: top; 
+    }
+}
+
+@media (max-width: 480px) {
+    * {
+    background-image: url('assets/images/background2.jpg');
+    background-image: url(); 
+    background-size: contain;
+    background-position: center;
+    }
+} */
