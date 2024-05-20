@@ -18,6 +18,83 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('Login failed: ' + loginError);
     }
 
+    // Function to delete a saved flight
+    function deleteFlightOption(tripId) {
+        console.log('Deleting flight with ID:', tripId); // Add this line
+        fetch(`/api/trips/delete-flight/${tripId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to delete flight');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Flight deleted:', data);
+            alert('Flight deleted successfully!');
+            location.reload(); // Reload the page to reflect changes
+        })
+        .catch(error => {
+            console.error('Error deleting flight:', error);
+        });
+    }
+
+    // Function to update a saved flight
+    function updateFlightOption(tripId) {
+        console.log('Updating flight with ID:', tripId); // Add this line
+        const updatedData = {
+            departDate: prompt("Enter new departure date (YYYY-MM-DD):"),
+            returnDate: prompt("Enter new return date (YYYY-MM-DD):"),
+            price: prompt("Enter new price:")
+        };
+
+        fetch(`/api/trips/update-flight/${tripId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedData)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to update flight');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Flight updated:', data);
+            alert('Flight updated successfully!');
+            location.reload(); // Reload the page to reflect changes
+        })
+        .catch(error => {
+            console.error('Error updating flight:', error);
+        });
+    }
+
+    // Add event listeners for update and delete buttons in saved flights page
+    if (window.location.pathname === '/saved-flights') {
+        console.log('On saved-flights page');
+        document.querySelectorAll('.update-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const tripId = this.getAttribute('data-id');
+                console.log('Update button clicked for tripId:', tripId); // Add this line
+                updateFlightOption(tripId);
+            });
+        });
+
+        document.querySelectorAll('.delete-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const tripId = this.getAttribute('data-id');
+                console.log('Delete button clicked for tripId:', tripId); // Add this line
+                deleteFlightOption(tripId);
+            });
+        });
+    }
+
     // Other script content...
     var tripTypeSelector = document.getElementById('trip-type');
     var multiCityContainer = document.getElementById('multi-city-container');
@@ -210,6 +287,26 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => {
             console.error('Error saving flight:', error);
+        });
+    }
+
+    // Add event listeners for update and delete buttons in saved flights page
+    if (window.location.pathname === '/saved-flights') {
+        console.log('On saved-flights page');
+        document.querySelectorAll('.update-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const tripId = this.getAttribute('data-id');
+                console.log('Update button clicked for tripId:', tripId); // Add this line
+                updateFlightOption(tripId);
+            });
+        });
+
+        document.querySelectorAll('.delete-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const tripId = this.getAttribute('data-id');
+                console.log('Delete button clicked for tripId:', tripId); // Add this line
+                deleteFlightOption(tripId);
+            });
         });
     }
 });

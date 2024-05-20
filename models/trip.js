@@ -60,6 +60,14 @@ module.exports = (sequelize) => {
         price: {
             type: DataTypes.DECIMAL(10, 2),
             allowNull: true
+        },
+        departTime: {
+            type: DataTypes.TIME,
+            allowNull: true
+        },
+        arrivalTime: {
+            type: DataTypes.TIME,
+            allowNull: true
         }
     }, {
         sequelize,
