@@ -98,23 +98,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // Other script content...
     var tripTypeSelector = document.getElementById('trip-type');
     var multiCityContainer = document.getElementById('multi-city-container');
-
-    tripTypeSelector.addEventListener('change', function() {
-        if (this.value === 'multicity') {
-            multiCityContainer.innerHTML = `
-                <div class="input-group">
-                    <label for="from-2">From</label>
-                    <input type="text" id="from-2" placeholder="Enter additional departure city">
-                </div>
-                <div class="input-group">
-                    <label for="to-2">To</label>
-                    <input type="text" id="to-2" placeholder="Enter additional destination city">
-                </div>`;
-        } else {
-            multiCityContainer.innerHTML = '';
-        }
-    });
-
+    if (tripTypeSelector && multiCityContainer) {
+        tripTypeSelector.addEventListener('change', function() {
+            if (this.value === 'multicity') {
+                multiCityContainer.innerHTML = `
+                    <div class="input-group">
+                        <label for="from-2">From</label>
+                        <input type="text" id="from-2" placeholder="Enter additional departure city">
+                    </div>
+                    <div class="input-group">
+                        <label for="to-2">To</label>
+                        <input type="text" id="to-2" placeholder="Enter additional destination city">
+                    </div>`;
+            } else {
+                multiCityContainer.innerHTML = '';
+            }
+        });
+    }
+    document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('search-form').addEventListener('submit', async function(event) {
         event.preventDefault();
         const fromCity = document.getElementById('from').value;
@@ -126,7 +127,9 @@ document.addEventListener('DOMContentLoaded', function() {
             children: parseInt(document.getElementById('children').value),
             infants: parseInt(document.getElementById('infants').value)
         };
+        const tripTypeSelector = document.getElementById('tripTypeSelector');
         const tripType = tripTypeSelector.value;
+
         const classType = document.getElementById('class').value;
 
         console.log("Search parameters:", { fromCity, toCity, departDate, passengerCounts, tripType, classType });
@@ -155,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
             container.innerHTML = 'Failed to load flights.';
         }
     });
-
+});
     function updateResultsDisplay(results, fromCity, toCity, departDate, passengerCounts, classType) {
         console.log(results);
         const container = document.getElementById('resultsContainer');
