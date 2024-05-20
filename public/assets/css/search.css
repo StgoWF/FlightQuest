@@ -1,0 +1,53 @@
+/* New Flex Container */
+.wrapper {
+    display: flex;
+}
+
+/* Styling for the container holding the search form */
+#search-form-container {
+    top: 95px;
+    left: 0;
+    bottom: 0; /* Make the box occupy the full height of the page */
+    width: 300px; /* Width of the box */
+    background-color: #f0f0f0;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+    display: flex;
+    flex-direction: column; /* Display items stacked vertically */
+    flex: 1;
+}
+
+/* Styling for the content inside the box */
+#search-form {
+    height: 100vh;
+    display: flex;
+    flex-direction: column; /* Display items stacked vertically */
+    gap: 24px; /* Spacing between elements */
+    padding: 10px;
+}
+
+#search-form button {
+    width: 100%; /* Use full width of the box */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#search-form button {
+    background-color: papayawhip;
+    color: #000;
+    cursor: pointer;
+}
+#search-form button:hover {
+    background-color: papayawhip;
+}
+
+.content-panel {
+    flex-grow: 1;
+    padding: 10px;
+    background-image: url("../images/SearchBG.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
