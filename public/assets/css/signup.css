@@ -1,38 +1,20 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
     background-color: transparent;
 }
-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 30px 10%;
-}
-.nav_links{
-    list-style: none;
-}
-.nav_links li{
-    display: inline-block;
-    padding: 0 20px;
-}
-.nav_links li a{
-    transition: all 0.3s ease 0s;
-}
-.nav_links li a:hover{
-    color: #0088a9;
-}
+
 .container {
-  width: 100%;
-  height: 100vh;
-  background-image: linear-gradient(rgba(0,0,50,0.8),rgba(0,0,50,0.8)), url("../images/FlightQuest.png");
-  background-position: center;
-  background-size: cover;
-  position: relative;
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0,0,50,0.8),rgba(0,0,50,0.8)), url("../images/FlightQuest.png");
+    background-position: center;
+    background-size: cover;
+    position: relative;
 }
 
 .login-form {
@@ -94,7 +76,27 @@ button {
     cursor: pointer;
     margin-bottom: 10px;
 }
-.sign-up-link {
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 10%;
+}
+.nav_links{
+    list-style: none;
+}
+.nav_links li{
+    display: inline-block;
+    padding: 0 20px;
+}
+.nav_links li a{
+    transition: all 0.3s ease 0s;
+}
+.nav_links li a:hover{
+    color: #0088a9;
+}
+#login_link{
     display: inline-block;
     padding: 10px 20px;
     font-size: 16px;
@@ -107,17 +109,11 @@ button {
     transition: background-color 0.3s, transform 0.3s;
 }
 
-.sign-up-link:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
-}
-
-.sign-up-link:active {
-    background-color: #004085;
-    transform: scale(0.95);
-}
-
-.sign-up-link:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+.main{
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0,0,50,0.8),rgba(0,0,50,0.8)), url("../images/FlightQuest.png");
+    background-position: center;
+    background-size: cover;
+    position: relative;
 }

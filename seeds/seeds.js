@@ -31,7 +31,9 @@ const seedTrips = [
         travelClass: 'economy',
         airlineCode: 'AA',
         flightDuration: '6h 30m',
-        price: 500.00
+        price: 500.00,
+        departTime: '08:00:00',
+        arrivalTime: '14:30:00'
     },
     {
         userId: 2,
@@ -45,7 +47,9 @@ const seedTrips = [
         travelClass: 'business',
         airlineCode: 'UA',
         flightDuration: '4h 0m',
-        price: 800.00
+        price: 800.00,
+        departTime: '09:00:00',
+        arrivalTime: '13:00:00'
     },
     {
         userId: 3,
@@ -59,7 +63,9 @@ const seedTrips = [
         travelClass: 'first_class',
         airlineCode: 'DL',
         flightDuration: '3h 30m',
-        price: 1200.00
+        price: 1200.00,
+        departTime: '10:00:00',
+        arrivalTime: '13:30:00'
     }
 ];
 
