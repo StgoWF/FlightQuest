@@ -3,13 +3,18 @@ const bcrypt = require('bcrypt');
 
 module.exports = (sequelize) => {
     class User extends Model {
-        // Method to compare password with hashed password in the database
         checkPassword(loginPw) {
             return bcrypt.compareSync(loginPw, this.password);
         }
     }
 
     User.init({
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true
+        },
         username: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -31,8 +36,10 @@ module.exports = (sequelize) => {
             }
         },
         sequelize,
-        modelName: 'User',
-        timestamps: false
+        timestamps: false,
+        underscored: true,
+        modelName: 'user',  // Nombre del modelo en singular y minúscula
+        tableName: 'users'  // Nombre de la tabla
     });
 
     return User;

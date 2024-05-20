@@ -1,18 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Saved Flights</title>
-    <link rel="stylesheet" href="/styles.css"> <!-- Link to your CSS file -->
-</head>
-<body>
-    <div class="saved-flights-container">
-        <h1>Saved Flights</h1>
-        <ul>
+<div class="saved-flights-container">
+    <h1>Saved Flights</h1>
+
+    <!-- List of saved flights -->
+    <ul>
             {{#each flights}}
-                <li>{{flightNumber}} - {{destination}}</li>
+                <li>
+                    From {{fromCity}} to {{toCity}} <br>
+                    Departure Date: {{departDate}} <br>
+                    Return Date: {{returnDate}} <br>
+                    Class: {{travelClass}} <br>
+                    Airline: {{airlineCode}} <br>
+                    Duration: {{flightDuration}} <br>
+                    Price: ${{price}}
+                </li>
             {{/each}}
-        </ul>
-    </div>
-</body>
-</html>
+    </ul>
+</div>

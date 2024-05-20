@@ -6,14 +6,14 @@
     <title>FlightQuest</title>
     <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
-<body>
+<body data-logged-in="{{#if logged_in}}true{{else}}false{{/if}}">
     <header>
         <h1>FlightQuest</h1>
         <nav id="nav">    
             <ul class="nav_links">
                 <li><a href="/">Home</a></li>
-                <li><a href="/dashboard">Dashboard</a></li>
                 {{#if logged_in}}
+                <li><a href="/saved-flights">Saved Flights</a></li>
                 <li><a href="/logout">Logout</a></li>
                 {{else}}
                 <li><a href="/login">Login</a></li>
@@ -25,26 +25,6 @@
 
     {{{body}}}
 
-    <script>
-        window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const signupSuccess = urlParams.get('signup');
-            const loginSuccess = urlParams.get('login');
-            const signupError = urlParams.get('signupError');
-            const loginError = urlParams.get('loginError');
-
-            if (signupSuccess === 'success') {
-                alert('Signup successful!');
-            } else if (signupError) {
-                alert('Signup failed: ' + signupError);
-            }
-
-            if (loginSuccess === 'success') {
-                alert('Login successful!');
-            } else if (loginError) {
-                alert('Login failed: ' + loginError);
-            }
-        }
-    </script>
+    <script src="/assets/js/script.js"></script>
 </body>
 </html>
