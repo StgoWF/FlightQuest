@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function saveFlightOption(flightData) {
-        fetch('/api/save-flight', {
+        fetch('/api/trips/save-flight', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
