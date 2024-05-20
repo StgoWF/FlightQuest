@@ -16,7 +16,7 @@ header{
     list-style: none;
 }
 .nav_links li{
-    padding: 0 20px;
+    padding: 0 15px;
 }
 .nav_links li a{
     transition: all 0.3s ease 0s;
