@@ -9,7 +9,8 @@ body {
 
 header {
     width: 100vw;
-    height: 15%;
+    height: 5%;
+    background-color: lightgray;
 }
 
 header h1 {
@@ -33,5 +34,6 @@ header nav li {
 
 header nav li a {
     text-decoration: none;
+    color: black;
 }
 
