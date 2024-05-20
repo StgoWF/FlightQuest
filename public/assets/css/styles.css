@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    top: 0;
+}
+
+body {
+    height: 100vh;
+}
+
+header {
+    width: 100vw;
+    height: 5%;
+    background-color: darkslateblue;
+}
+
+header h1 {
+    display: inline-block;
+    margin: 0 25px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: whitesmoke;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    float: inline-end;
+    list-style-type: none;
+}
+
+header nav li {
+    display: inline-block;
+    margin-inline-end: 25px;
+    font-size: 25px;
+}
+
+header nav li a {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
