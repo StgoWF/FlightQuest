@@ -62,9 +62,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.get('/', (req, res) => {
     res.render('search', { logged_in: req.session.logged_in });
 });
-app.get('/saved-flights', (req, res) => {
-    res.render('saved-flights');
-});
+
 sequelize.sync({ force: false }).then(() => {
     console.log('Database tables created or updated!');
     app.listen(PORT, async () => {
