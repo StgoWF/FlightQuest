@@ -1,0 +1,192 @@
+#search-form {
+    background-color: rgba(255, 255, 255, 0.9); /* semi-transparent white */
+    padding: 2rem;
+    margin: 50px auto;
+    border-radius: 5px;
+    box-shadow: 0 2 5px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    color: #007bff;
+}
+
+.input-group input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input-group button {
+    background-color: #007bff;
+    color: white;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.input-group button:hover {
+    background-color: #0056b3;
+}
+
+* {
+    /* Removing default margin and padding */
+    margin: 0;
+    padding: 0;
+}
+
+/* Font face */
+@font-face {
+    font-family: 'Poppins';
+    src: url('/assets/fonts/Poppins-Regular.ttf') format('truetype'),
+         url('/assets/fonts/Poppins-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Global styles */
+aside {
+    font-family: 'Poppins', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #c8dadb;
+}
+
+form {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: url("../images/background2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#trip-type,
+#class {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+#class {
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.number-selector {
+    background-color: rgba(255, 255, 255, 0.9); /* semi-transparent white */
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.number-selector h2 {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    color: #007bff;
+}
+
+.passenger-count input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.passenger-count button {
+    background-color: #007bff;
+    color: white;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.passenger-count button:hover {
+    background-color: #0056b3;
+}
+
+.search-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 600px) {
+    body {
+        padding: 1rem;
+    }
+    .login-form, .number-selector {
+        padding: 1.5rem;
+    }
+    .login-title, .number-selector h2 {
+        font-size: 1.5rem;
+    }
+    .login-form form, .number-selector {
+        gap: 0.5rem;
+    }
+   
+    .number-selector input, 
+    .number-selector button {
+        font-size: 0.9rem;
+        padding: 0.4rem;
+    }
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+    .nav-menu.active {
+        display: flex;
+    }
+    .nav-toggle {
+        display: flex;
+    }
+}

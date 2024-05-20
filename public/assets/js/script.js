@@ -213,3 +213,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+document.addEventListener('DOMContentLoaded', () => {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    navToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+    });
+
+    const numberButton = document.getElementById('numberButton');
+    const numberInput = document.getElementById('numberInput');
+
+    numberButton.addEventListener('click', () => {
+        const number = numberInput.value;
+        alert(`You have selected the number: ${number}`);
+    });
+});
