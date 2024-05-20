@@ -291,3 +291,35 @@ document.addEventListener('DOMContentLoaded', () => {
         alert(`You have selected the number: ${number}`);
     });
 });
+
+function quantityBtn(click) {
+    const adults = document.getElementsById("adults");
+    const sumvalue = parseInt(adults.innerText) + click;
+    console.log(sumvalue + click);
+    adults.innerText = sumvalue;
+
+    if(sumvalue < 0) {
+        adults.innerText = 0;
+    }
+}
+
+function quantityBtn(click) {
+    const children = document.getElementsById("children");
+    const sumvalue = parseInt(children.innerText) + click;
+    console.log(sumvalue + click);
+    children.innerText = sumvalue;
+
+    if(sumvalue < 0) {
+        children.innerText = 0;
+    }
+}
+function quantityBtn(click) {
+    const infants = document.getElementsById("infants");
+    const sumvalue = parseInt(infants.innerText) + click;
+    console.log(sumvalue + click);
+    children.innerText = sumvalue;
+
+    if(sumvalue < 0) {
+        infants.innerText = 0;
+    }
+}
