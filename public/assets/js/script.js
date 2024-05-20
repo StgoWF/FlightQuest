@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
+    document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('search-form').addEventListener('submit', async function(event) {
         event.preventDefault();
         const fromCity = document.getElementById('from').value;
@@ -50,7 +50,9 @@ document.addEventListener('DOMContentLoaded', function() {
             children: parseInt(document.getElementById('children').value),
             infants: parseInt(document.getElementById('infants').value)
         };
+        const tripTypeSelector = document.getElementById('tripTypeSelector');
         const tripType = tripTypeSelector.value;
+
         const classType = document.getElementById('class').value;
 
         console.log("Search parameters:", { fromCity, toCity, departDate, passengerCounts, tripType, classType });
@@ -79,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
             container.innerHTML = 'Failed to load flights.';
         }
     });
-
+});
     function updateResultsDisplay(results, fromCity, toCity, departDate, passengerCounts, classType) {
         console.log(results);
         const container = document.getElementById('resultsContainer');
