@@ -6,14 +6,16 @@
     <link rel="stylesheet" href="/assets/css/signup.css"> <!-- Link to your CSS file -->
 </head>
 <body>
-    <div class="login-form" id="main">
-        <h2 class="login-title">Sign Up</h2>
-        <form method="POST" action="/signup">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Sign Up</button>
-        </form>
-        <a href="/login" class="sign-up-link">Login instead</a>
+    <div class="main">
+        <div class="login-form" id="main">
+            <h2 class="login-title">Sign Up</h2>
+            <form method="POST" action="/signup">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit">Sign Up</button>
+            </form>
+            <a href="/login" id="login_link">Login instead</a>
+        </div>
     </div>
 </body>
 </html>
