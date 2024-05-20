@@ -95,70 +95,52 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Other script content...
-    var tripTypeSelector = document.getElementById('trip-type');
-    var multiCityContainer = document.getElementById('multi-city-container');
-    if (tripTypeSelector && multiCityContainer) {
-        tripTypeSelector.addEventListener('change', function() {
-            if (this.value === 'multicity') {
-                multiCityContainer.innerHTML = `
-                    <div class="input-group">
-                        <label for="from-2">From</label>
-                        <input type="text" id="from-2" placeholder="Enter additional departure city">
-                    </div>
-                    <div class="input-group">
-                        <label for="to-2">To</label>
-                        <input type="text" id="to-2" placeholder="Enter additional destination city">
-                    </div>`;
-            } else {
-                multiCityContainer.innerHTML = '';
+    // Handle search form submission
+    const searchForm = document.getElementById('search-form');
+    if (searchForm) {
+        searchForm.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const fromCity = document.getElementById('from').value;
+            const toCity = document.getElementById('to').value;
+            const departDate = document.getElementById('depart-date').value;
+
+            const passengerCounts = {
+                adults: parseInt(document.getElementById('adults').value),
+                children: parseInt(document.getElementById('children').value),
+                infants: parseInt(document.getElementById('infants').value)
+            };
+            const tripTypeSelector = document.getElementById('trip-type');
+            const tripType = tripTypeSelector.value;
+            const classType = document.getElementById('class').value;
+
+            console.log("Search parameters:", { fromCity, toCity, departDate, passengerCounts, tripType, classType });
+
+            try {
+                const fromIdResponse = await fetch(`/api/flights/getAirportId?city=${encodeURIComponent(fromCity)}`);
+                if (!fromIdResponse.ok) throw new Error('Failed to fetch fromId');
+                const fromIdData = await fromIdResponse.json();
+                const fromId = fromIdData.airportId;
+
+                const toIdResponse = await fetch(`/api/flights/getAirportId?city=${encodeURIComponent(toCity)}`);
+                if (!toIdResponse.ok) throw new Error('Failed to fetch toId');
+                const toIdData = await toIdResponse.json();
+                const toId = toIdData.airportId;
+
+                console.log("Airport IDs:", { fromId, toId });
+
+                const flightResponse = await fetch(`/api/flights/search-flights?fromId=${fromId}&toId=${toId}&departDate=${departDate}&passengers=${JSON.stringify(passengerCounts)}&class=${classType}&tripType=${tripType}`);
+                if (!flightResponse.ok) throw new Error('Failed to fetch flight data');
+                const flightResults = await flightResponse.json();
+                console.log("Search results:", flightResults);
+                updateResultsDisplay(flightResults, fromCity, toCity, departDate, passengerCounts, classType);
+            } catch (error) {
+                console.error('Fetch error:', error);
+                const container = document.getElementById('resultsContainer');
+                container.innerHTML = 'Failed to load flights.';
             }
         });
     }
-    document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('search-form').addEventListener('submit', async function(event) {
-        event.preventDefault();
-        const fromCity = document.getElementById('from').value;
-        const toCity = document.getElementById('to').value;
-        const departDate = document.getElementById('depart-date').value;
 
-        const passengerCounts = {
-            adults: parseInt(document.getElementById('adults').value),
-            children: parseInt(document.getElementById('children').value),
-            infants: parseInt(document.getElementById('infants').value)
-        };
-        const tripTypeSelector = document.getElementById('tripTypeSelector');
-        const tripType = tripTypeSelector.value;
-
-        const classType = document.getElementById('class').value;
-
-        console.log("Search parameters:", { fromCity, toCity, departDate, passengerCounts, tripType, classType });
-
-        try {
-            const fromIdResponse = await fetch(`/api/flights/getAirportId?city=${encodeURIComponent(fromCity)}`);
-            if (!fromIdResponse.ok) throw new Error('Failed to fetch fromId');
-            const fromIdData = await fromIdResponse.json();
-            const fromId = fromIdData.airportId;
-
-            const toIdResponse = await fetch(`/api/flights/getAirportId?city=${encodeURIComponent(toCity)}`);
-            if (!toIdResponse.ok) throw new Error('Failed to fetch toId');
-            const toIdData = await toIdResponse.json();
-            const toId = toIdData.airportId;
-
-            console.log("Airport IDs:", { fromId, toId });
-
-            const flightResponse = await fetch(`/api/flights/search-flights?fromId=${fromId}&toId=${toId}&departDate=${departDate}&passengers=${JSON.stringify(passengerCounts)}&class=${classType}&tripType=${tripType}`);
-            if (!flightResponse.ok) throw new Error('Failed to fetch flight data');
-            const flightResults = await flightResponse.json();
-            console.log("Search results:", flightResults);
-            updateResultsDisplay(flightResults, fromCity, toCity, departDate, passengerCounts, classType);
-        } catch (error) {
-            console.error('Fetch error:', error);
-            const container = document.getElementById('resultsContainer');
-            container.innerHTML = 'Failed to load flights.';
-        }
-    });
-});
     function updateResultsDisplay(results, fromCity, toCity, departDate, passengerCounts, classType) {
         console.log(results);
         const container = document.getElementById('resultsContainer');
@@ -290,26 +272,6 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => {
             console.error('Error saving flight:', error);
-        });
-    }
-
-    // Add event listeners for update and delete buttons in saved flights page
-    if (window.location.pathname === '/saved-flights') {
-        console.log('On saved-flights page');
-        document.querySelectorAll('.update-button').forEach(button => {
-            button.addEventListener('click', function() {
-                const tripId = this.getAttribute('data-id');
-                console.log('Update button clicked for tripId:', tripId); // Add this line
-                updateFlightOption(tripId);
-            });
-        });
-
-        document.querySelectorAll('.delete-button').forEach(button => {
-            button.addEventListener('click', function() {
-                const tripId = this.getAttribute('data-id');
-                console.log('Delete button clicked for tripId:', tripId); // Add this line
-                deleteFlightOption(tripId);
-            });
         });
     }
 });
