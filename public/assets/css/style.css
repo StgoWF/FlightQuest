@@ -17,17 +17,10 @@ header {
     align-items: center;
 }
 
-/* header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 30px 10%;
-} */
 .nav_links{
     list-style: none;
 }
 .nav_links li{
-    /* display: inline-block; */
     padding: 0 15px;
 }
 .nav_links li a{
@@ -36,7 +29,6 @@ header {
 .nav_links li a:hover{
     color: #0088a9;
 }
-
 
 header h1 {
     display: inline-block;
@@ -64,5 +56,49 @@ header nav li a {
     color: rgb(255, 255, 255);
     -webkit-text-stroke-width: 0.2px;
     -webkit-text-stroke-color: rgb(19, 38, 161);
+}
+
+#sidebar {
+    position: fixed;
+    display: none;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 250px;
+    z-index: 999;
+    background-color: #999;
+    backdrop-filter: blur(10px);
+    box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+#sidebar li {
+    width: 100%;
+}
+
+#sidebar a {
+    width: 100%;
+}
+
+/* Hide menu button - should only display on smaller screens */
+.menu_button {
+    display: none;
+}
+/* Hides horizontal navbar links when less than 950px */
+@media(max-width: 1020px) {
+    .menu_button {
+        display: block;
+    }
+    .hideMobile {
+        display: none;
+    }
+}
+/* sidebar takes up 100% when less than 400px */
+@media(max-width: 800px) {
+    #sidebar {
+        width: 100%;
+    }
 }
 
