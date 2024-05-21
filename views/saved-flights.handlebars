@@ -9,11 +9,12 @@
 </head>
 <body>
     <div class="container">
+        </div>
         <div class="saved-flights-container">
 
             <!-- List of saved flights -->
-            <ul>
-                <div id="cardFlights" class="card col-6 offset-3" style="width: 50%;">
+            <ul class="cardFlights">
+                <div class="card col-6 offset-3" style="width: 50%;">
                     <h1>Saved Flights</h1>
                     <div class="card-body">
                         {{#each flights}}
@@ -28,11 +29,14 @@
                         <button class="delete-button" data-id="{{id}}">Delete</button>
                         <button class="update-button" data-id="{{id}}">Update</button> <br>
                     </li>
+                    <div class="break">
+                        <p></p>
+                    </div>
                     {{/each}}
                     </div>           
                 </div>
             </ul>
         </div>
-    </div>
+    
 </body>
 </html>
