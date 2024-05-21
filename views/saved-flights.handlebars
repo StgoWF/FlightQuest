@@ -1,10 +1,19 @@
-<div class="saved-flights-container">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/assets/css/savedflights.css">
+</head>
+<body>
+    <div class="saved-flights-container">
     <h1>Saved Flights</h1>
 
     <!-- List of saved flights -->
     <ul>
             {{#each flights}}
-            <li>
+            <li class="savedFlights">
                 From {{fromCity}} to {{toCity}} <br>
                 Departure Date: {{departDate}} {{departureTime}}<br> <!-- Adding departure time -->
                 Return Date: {{returnDate}} <br>
@@ -13,8 +22,10 @@
                 Duration: {{flightDuration}} <br>
                 Price: ${{price}} <br>
                 <button class="delete-button" data-id="{{id}}">Delete</button>
-                <button class="update-button" data-id="{{id}}">Update</button>
+                <button class="update-button" data-id="{{id}}">Update</button> <br>
             </li>
             {{/each}}
     </ul>
 </div>
+</body>
+</html>

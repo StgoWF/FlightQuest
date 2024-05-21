@@ -1,0 +1,22 @@
+* { 
+    margin: 0;
+    padding: 0;
+}
+
+.saved-flights-container {
+    text-align: center;
+    height: 100vh;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.savedFlights {
+    background-color: lightgray;
+    border-radius: 7px;
+    max-width: 500px;
+    margin-bottom: 15px;
+    transform: translatex(75%);
+    list-style-type: none;
+}
