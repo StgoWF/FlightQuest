@@ -274,67 +274,69 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error saving flight:', error);
         });
     }
+
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     const navToggle = document.querySelector('.nav-toggle');
+//     const navMenu = document.querySelector('.nav-menu');
+
+//     navToggle.addEventListener('click', () => {
+//         navMenu.classList.toggle('active');
+//     });
+
+//     const numberButton = document.getElementById('numberButton');
+//     const numberInput = document.getElementById('numberInput');
+
+//     numberButton.addEventListener('click', () => {
+//         const number = numberInput.value;
+//         alert(`You have selected the number: ${number}`);
+//     });
+// });
+
+// function quantityBtn(click) {
+//     const adults = document.getElementsById("adults");
+//     const sumvalue = parseInt(adults.innerText) + click;
+//     console.log(sumvalue + click);
+//     adults.innerText = sumvalue;
+
+//     if(sumvalue < 0) {
+//         adults.innerText = 0;
+//     }
+// }
+
+// function quantityBtn(click) {
+//     const children = document.getElementsById("children");
+//     const sumvalue = parseInt(children.innerText) + click;
+//     console.log(sumvalue + click);
+//     children.innerText = sumvalue;
+
+//     if(sumvalue < 0) {
+//         children.innerText = 0;
+//     }
+// }
+// function quantityBtn(click) {
+//     const infants = document.getElementsById("infants");
+//     const sumvalue = parseInt(infants.innerText) + click;
+//     console.log(sumvalue + click);
+//     children.innerText = sumvalue;
+
+//     if(sumvalue < 0) {
+//         infants.innerText = 0;
+//     }
+// }
+
+
+
 });
-<<<<<<< HEAD
-document.addEventListener('DOMContentLoaded', () => {
-    const navToggle = document.querySelector('.nav-toggle');
-    const navMenu = document.querySelector('.nav-menu');
-
-    navToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-    });
-
-    const numberButton = document.getElementById('numberButton');
-    const numberInput = document.getElementById('numberInput');
-
-    numberButton.addEventListener('click', () => {
-        const number = numberInput.value;
-        alert(`You have selected the number: ${number}`);
-    });
-});
-
-function quantityBtn(click) {
-    const adults = document.getElementsById("adults");
-    const sumvalue = parseInt(adults.innerText) + click;
-    console.log(sumvalue + click);
-    adults.innerText = sumvalue;
-
-    if(sumvalue < 0) {
-        adults.innerText = 0;
-    }
-}
-
-function quantityBtn(click) {
-    const children = document.getElementsById("children");
-    const sumvalue = parseInt(children.innerText) + click;
-    console.log(sumvalue + click);
-    children.innerText = sumvalue;
-
-    if(sumvalue < 0) {
-        children.innerText = 0;
-    }
-}
-function quantityBtn(click) {
-    const infants = document.getElementsById("infants");
-    const sumvalue = parseInt(infants.innerText) + click;
-    console.log(sumvalue + click);
-    children.innerText = sumvalue;
-
-    if(sumvalue < 0) {
-        infants.innerText = 0;
-    }
-}
-=======
-
 // sideBar function 
 
 function showSidebar() {
     event.preventDefault();
-    const sidebar = document.querySelector("#sidebar")
-    sidebar.style.display = "flex"
+    const sidebar = document.querySelector("#sidebar");
+    sidebar.style.display = "flex";
 }
 function hideSidebar() {
-    const sidebar = document.querySelector("#sidebar")
-    sidebar.style.display = "none"
+    const sidebar = document.querySelector("#sidebar");
+    sidebar.style.display = "none";
 }
->>>>>>> 7f9d5c61ee0f1b3792ca620f6ca6f4e2d09d09b9
+

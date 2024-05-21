@@ -6,27 +6,35 @@
 }
 
 body {
-    background-color: transparent;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: url("../images/background2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.container {
+
+/* .container {
   width: 100%;
   height: 100vh;
   background-image: linear-gradient(rgba(0,0,50,0.8),rgba(0,0,50,0.8)), url("../images/FlightQuest.png");
   background-position: center;
   background-size: cover;
   position: relative;
-}
+} */
 
 .login-form {
     width: 90%;
     max-width: 450px;
     position: absolute;
     left: 50%;
-    transform: translate(-50%, 50%);
+    transform: translate(-50%, 30%);
     padding: 50px 60px 70px;
     text-align: center;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.9); /* semi-transparent white */
     border-radius: 12px;
 }
 
@@ -103,8 +111,8 @@ button {
 .sign-up-link:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
-}.login-form {
-    background-color: rgba(255, 255, 255, 0.9); /* semi-transparent white */
+/* }.login-form {
+    background-color: rgba(255, 255, 255, 0.9); 
     padding: 2rem;
     margin: 50px auto;
     border-radius: 5px;
@@ -131,7 +139,7 @@ button {
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
-}
+} */
 
 .login-form button {
     background-color: #007bff;
@@ -193,14 +201,14 @@ button {
 }
 
 /* Global styles */
-body {
+/* body {
     font-family: 'Poppins', Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #c8dadb;
-}
+} */
 
-body {
+/* body {
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -209,22 +217,22 @@ body {
     background-size: cover;
     background-position: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+} */
 
 
-button {
+/* button {
     background: none;
     border: none;
 }
 
 .login-title {
     font-size: 25px;
-}
+} */
 
 
 
 /* Form styles */
-title {
+/* title {
     text-align: center;
     margin-bottom: 20px;
 }
@@ -248,10 +256,10 @@ input[type="password"] {
 
 p[type="error-message"] {
     margin-right: 10px;
-}
+} */
 
 /* Submit button styles */
-button[type="submit"] {
+/* button[type="submit"] {
     background-color: #00c4bb;
     color: #fff;
     border: none;
@@ -262,5 +270,5 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
     background-color: #008c95;
-}
+} */
 

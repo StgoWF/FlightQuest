@@ -58,8 +58,7 @@ header nav li a {
     -webkit-text-stroke-color: rgb(19, 38, 161);
 }
 
-<<<<<<< HEAD
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -85,8 +84,8 @@ body > header {
     padding: 10px 20px; 
     display: flex;
     
-}
-header {
+} */
+/* header {
     background-color: #007bff;
     color: white;
     padding: 1rem 0;
@@ -97,7 +96,7 @@ header {
 header h1 {
     margin: 0;
     font-size: 2.5rem;
-}
+} */
 
 main {
     padding: 2rem;
@@ -192,7 +191,6 @@ footer p {
         padding: 0.4rem;
     }
 }
-=======
 #sidebar {
     position: fixed;
     display: none;
@@ -237,4 +235,3 @@ footer p {
     }
 }
 
->>>>>>> 7f9d5c61ee0f1b3792ca620f6ca6f4e2d09d09b9
