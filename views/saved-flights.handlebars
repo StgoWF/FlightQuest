@@ -1,3 +1,27 @@
+<<<<<<< HEAD
+<div class="saved-flights-container">
+    <link rel="stylesheet" href="assets/css/saved-flight.css">
+    <h1>Saved Flights</h1>
+
+    <!-- List of saved flights -->
+    <ul>
+            {{#each flights}}
+            <li>
+                From {{fromCity}} to {{toCity}} <br>
+                Departure Date: {{departDate}} {{departureTime}}<br> <!-- Adding departure time -->
+                Return Date: {{returnDate}} <br>
+                Class: {{travelClass}} <br>
+                Airline: {{airlineCode}} <br>
+                Duration: {{flightDuration}} <br>
+                Price: ${{price}} <br>
+                <button class="delete-button" data-id="{{id}}">Delete</button>
+                <button class="update-button" data-id="{{id}}">Update</button>
+            </li>
+            {{/each}}
+    </ul>
+    <script src="/assets/js/script.js"></script>
+</div>
+=======
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,3 +64,4 @@
     
 </body>
 </html>
+>>>>>>> 7f9d5c61ee0f1b3792ca620f6ca6f4e2d09d09b9
