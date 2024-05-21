@@ -30,7 +30,7 @@
 #search-form button {
     width: 100%; /* Use full width of the box */
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #000000;
     border-radius: 4px;
     box-sizing: border-box;
 }
