@@ -35,7 +35,7 @@ As a travel enthusiast, I want a web page where I can easily plan and customize 
 
 ## Demonstration
 
-[Engage with TailorMyTrip](https://stgowf.github.io/TailorMyTrip/)
+[Engage with FlightQuest](https://flightquest-e755c2dda8ba.herokuapp.com/)
 ## Technologies Used
 - HTML
 - CSS
