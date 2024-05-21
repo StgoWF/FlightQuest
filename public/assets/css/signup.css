@@ -22,10 +22,10 @@ body {
     max-width: 450px;
     position: absolute;
     left: 50%;
-    transform: translate(-50%, 50%);
+    transform: translate(-50%, 30%);
     padding: 50px 60px 70px;
     text-align: center;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 12px;
 }
 
@@ -96,5 +96,161 @@ button {
     background-image: linear-gradient(rgba(0,0,50,0.8),rgba(0,0,50,0.8)), url("../images/FlightQuest.png");
     background-position: center;
     background-size: cover;
-    position: relative;
+    position: relative; 
 }
+/* .login-form {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    margin: 50px auto;
+    border-radius: 5px;
+    box-shadow: 0 2 5px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+}
+
+.login-title {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    color: #007bff;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+} 
+
+.login-form input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+} */
+
+/* .login-form button {
+    background-color: #007bff;
+    color: white;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+} */
+
+.login-form button:hover {
+    background-color: #0056b3;
+}
+
+.sign-up-link {
+    display: block;
+    margin-top: 1rem;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.sign-up-link:hover {
+    text-decoration: underline;
+}
+@media (max-width: 600px) {
+    body {
+        padding: 1rem;
+    }
+    .login-form {
+        padding: 1.5rem;
+    }
+    .login-title {
+        font-size: 1.5rem;
+    }
+    .login-form form {
+        gap: 0.5rem;
+    }
+    .login-form input, 
+    .login-form button {
+        font-size: 0.9rem;
+        padding: 0.4rem;
+    }
+}
+* {
+    /* Removing default margin and padding */
+    margin: 0;
+    padding: 0;
+}
+
+/* Font face */
+@font-face {
+    font-family: 'Poppins';
+    src: url('/assets/fonts/Poppins-Regular.ttf') format('truetype'),
+         url('/assets/fonts/Poppins-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Global styles */
+/* body {
+    font-family: 'Poppins', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #c8dadb;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: url("../images/background2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+button {
+    background: none;
+    border: none;
+}
+
+.login-title {
+    font-size: 25px;
+} */
+
+
+
+/* Form styles */
+/* title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+input[type="text"],
+input[type="password"]
+input [type="confirm-password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+
+p[type="error-message"] {
+    margin-right: 10px;
+} */
+
+/* Submit button styles */
+/* button[type="submit"] {
+    background-color: #00c4bb;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button[type="submit"]:hover {
+    background-color: #008c95;
+} */
