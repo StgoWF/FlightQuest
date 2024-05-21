@@ -204,23 +204,6 @@ form {
     }
 }
 
-
-/* Media queries for responsiveness *
-@media (max-width: 768px) {
-    * {
-        background-size: contain;
-        background-position: top; 
-    }
-}
-
-@media (max-width: 480px) {
-    * {
-    background-image: url('assets/images/background2.jpg');
-    background-image: url(); 
-    background-size: contain;
-    background-position: center;
-    }
-} */
 /* New Flex Container */
 .wrapper {
     display: flex;

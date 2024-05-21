@@ -58,46 +58,6 @@ header nav li a {
     -webkit-text-stroke-color: rgb(19, 38, 161);
 }
 
-/* * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.6;
-    background-color: #f0f8ff;
-    color: #333;
-    height: 100vh; 
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-}
-body > header {
-    top: 0px;
-    left: 1px;
-    height: 95px;
-    background-color: #00c4bb;
-    border-bottom: 1px solid #f0f0f0;
-    box-sizing: border-box;
-    padding: 10px 20px; 
-    display: flex;
-    
-} */
-/* header {
-    background-color: #007bff;
-    color: white;
-    padding: 1rem 0;
-    text-align: center;
-    padding: 20px;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 2.5rem;
-} */
-
 main {
     padding: 2rem;
     text-align: center;
