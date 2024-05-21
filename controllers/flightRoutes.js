@@ -1,6 +1,6 @@
 // Import required modules
 const express = require('express');
-const FlightAPI = require('../services/flightapi');
+const FlightAPI = require('../public/assets/js/flightapi');
 const router = express.Router();
 
 // Route to get AirportId
