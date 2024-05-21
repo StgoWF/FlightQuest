@@ -31,3 +31,10 @@ body {
     margin: auto;
     list-style-type: none;
 }
+
+@media(max-width: 900px) {
+    .cardFlights {
+        width: 100%;
+        margin: auto;
+    }
+}
