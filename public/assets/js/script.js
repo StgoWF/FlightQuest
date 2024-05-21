@@ -275,6 +275,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+<<<<<<< HEAD
 document.addEventListener('DOMContentLoaded', () => {
     const navToggle = document.querySelector('.nav-toggle');
     const navMenu = document.querySelector('.nav-menu');
@@ -323,3 +324,17 @@ function quantityBtn(click) {
         infants.innerText = 0;
     }
 }
+=======
+
+// sideBar function 
+
+function showSidebar() {
+    event.preventDefault();
+    const sidebar = document.querySelector("#sidebar")
+    sidebar.style.display = "flex"
+}
+function hideSidebar() {
+    const sidebar = document.querySelector("#sidebar")
+    sidebar.style.display = "none"
+}
+>>>>>>> 7f9d5c61ee0f1b3792ca620f6ca6f4e2d09d09b9
