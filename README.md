@@ -29,9 +29,9 @@ As a travel enthusiast, I want a web page where I can easily plan and customize 
 
 ## Screenshots
 
-![Flight Search](./assets/images/flights-screenshot.png)
-![Hotel Search](./assets/images/hotel-screenshot.png)
-![Home Page](./assets/images/index-screenshot.png)
+![Flight Search](./public/assets/images/Homepage.png)
+![Saved Flights](./public/assets/images/Saved%20Flights.png)
+![Login Page](./public/assets/images/Login%20Page.png)
 
 ## Demonstration
 
