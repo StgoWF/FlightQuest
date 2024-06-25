@@ -19,10 +19,10 @@ body > header {
     /* Your existing styles for the header */
     top: 0px;
     left: 1px;
-    background-color: papayawhip;
     border-bottom: 1px solid #f0f0f0;
     box-sizing: border-box;
     padding: 10px 20px; /* Padding for better spacing */
+    height: auto;
 }
 
 button {
@@ -109,7 +109,7 @@ nav li:first-child {
 }
 
 /* Hides horizontal navbar links when less than 950px */
-@media(max-width: 1020px) {
+@media(max-width: 768x) {
     .menu_button {
         display: block;
     }

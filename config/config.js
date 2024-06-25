@@ -1,7 +1,3 @@
-// config/config.js
-require('dotenv').config();
-console.log('Starting server...');
-
 console.log("Environment:", process.env.NODE_ENV);
 module.exports = {
   development: {
@@ -11,7 +7,7 @@ module.exports = {
     host: process.env.DB_HOST,
     dialect: 'mysql',
     define: {
-      timestamps: true  // Make sure all created tables do not expect default timestamp fields
+      timestamps: true
     }
   },
   production: {
@@ -19,14 +15,14 @@ module.exports = {
     dialect: 'mysql',
     migrationStorageTableName: "sequelize_migrations",
     define: {
-      timestamps: true  // Apply the same for production environment
+      timestamps: true
     },
     dialectOptions: {
       ssl: {
         require: true,
-        rejectUnauthorized: false  // Necessary for secure database connections
+        rejectUnauthorized: false
       }
     },
-    logging: true  // Disable SQL query logging to clean up console output
+    logging: true
   }
 };

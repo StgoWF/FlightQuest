@@ -1,7 +1,9 @@
-let currentImageIndex = 0; 
-let imageArray = ['./assets/images/UI MockUps/Flight Search Engine Pics/pic1.png','./assets/images/UI MockUps/Flight Search Engine Pics/pic2.png','./assets/images/UI Mock Ups/Flight Search Engine Pics/pic3.png']; 
+let currentImageIndex = 0;
+let imageArray = ['./assets/images/UI MockUps/Flight Search Engine Pics/pic1.png', './assets/images/UI Mock Ups/Flight Search Engine Pics/pic2.png', './assets/images/UI Mock Ups/Flight Search Engine Pics/pic3.png'];
 
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM fully loaded and parsed');
+
     // Handle the signup and login messages
     const urlParams = new URLSearchParams(window.location.search);
     const signupSuccess = urlParams.get('signup');
@@ -23,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to delete a saved flight
     function deleteFlightOption(tripId) {
-        console.log('Deleting flight with ID:', tripId); // Add this line
+        console.log('Deleting flight with ID:', tripId);
         fetch(`/api/trips/delete-flight/${tripId}`, {
             method: 'DELETE',
             headers: {
@@ -48,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to update a saved flight
     function updateFlightOption(tripId) {
-        console.log('Updating flight with ID:', tripId); // Add this line
+        console.log('Updating flight with ID:', tripId);
         const updatedData = {
             departDate: prompt("Enter new departure date (YYYY-MM-DD):"),
             returnDate: prompt("Enter new return date (YYYY-MM-DD):"),
@@ -84,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.update-button').forEach(button => {
             button.addEventListener('click', function() {
                 const tripId = this.getAttribute('data-id');
-                console.log('Update button clicked for tripId:', tripId); // Add this line
+                console.log('Update button clicked for tripId:', tripId);
                 updateFlightOption(tripId);
             });
         });
@@ -92,66 +94,49 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.delete-button').forEach(button => {
             button.addEventListener('click', function() {
                 const tripId = this.getAttribute('data-id');
-                console.log('Delete button clicked for tripId:', tripId); // Add this line
+                console.log('Delete button clicked for tripId:', tripId);
                 deleteFlightOption(tripId);
             });
         });
     }
 
-    // Handle search form submission
-    const searchForm = document.getElementById('search-form');
-    if (searchForm) {
-        searchForm.addEventListener('submit', async function(event) {
-            event.preventDefault();
-            const fromCity = document.getElementById('from').value;
-            const toCity = document.getElementById('to').value;
-            const departDate = document.getElementById('depart-date').value;
-
-            const passengerCounts = {
-                adults: parseInt(document.getElementById('adults').value),
-                children: parseInt(document.getElementById('children').value),
-                infants: parseInt(document.getElementById('infants').value)
-            };
-            const tripTypeSelector = document.getElementById('trip-type');
-            const tripType = tripTypeSelector.value;
-            const classType = document.getElementById('class').value;
-
-            console.log("Search parameters:", { fromCity, toCity, departDate, passengerCounts, tripType, classType });
-
-            try {
-                const fromIdResponse = await fetch(`/api/flights/getAirportId?city=${encodeURIComponent(fromCity)}`);
-                if (!fromIdResponse.ok) throw new Error('Failed to fetch fromId');
-                const fromIdData = await fromIdResponse.json();
-                const fromId = fromIdData.airportId;
-
-                const toIdResponse = await fetch(`/api/flights/getAirportId?city=${encodeURIComponent(toCity)}`);
-                if (!toIdResponse.ok) throw new Error('Failed to fetch toId');
-                const toIdData = await toIdResponse.json();
-                const toId = toIdData.airportId;
-
-                console.log("Airport IDs:", { fromId, toId });
-
-                const flightResponse = await fetch(`/api/flights/search-flights?fromId=${fromId}&toId=${toId}&departDate=${departDate}&passengers=${JSON.stringify(passengerCounts)}&class=${classType}&tripType=${tripType}`);
-                if (!flightResponse.ok) throw new Error('Failed to fetch flight data');
-                const flightResults = await flightResponse.json();
-                console.log("Search results:", flightResults);
-                updateResultsDisplay(flightResults, fromCity, toCity, departDate, passengerCounts, classType);
-            } catch (error) {
-                console.error('Fetch error:', error);
-                const container = document.getElementById('resultsContainer');
-                container.innerHTML = 'Failed to load flights.';
-            }
-        });
+    async function getAirportIDFromCity(city) {
+        console.log(`Fetching airport ID for city: ${city}`);
+        try {
+            const response = await fetch(`/api/flights/getAirportId?city=${encodeURIComponent(city)}`);
+            if (!response.ok) throw new Error('Failed to fetch airport ID');
+            const data = await response.json();
+            console.log(`Fetched airport ID for city ${city}: ${data.airportId}`);
+            return data.airportId;
+        } catch (error) {
+            console.error('Error getting airport ID:', error);
+            throw error;
+        }
     }
 
-    function updateResultsDisplay(results, fromCity, toCity, departDate, passengerCounts, classType) {
+    async function searchFlights(fromId, toId, departDate, passengerCounts, classType, tripType) {
+        console.log(`Searching flights from ${fromId} to ${toId} on ${departDate}`);
+        try {
+            const response = await fetch(`/api/flights/search-flights?fromId=${fromId}&toId=${toId}&departDate=${departDate}&passengers=${JSON.stringify(passengerCounts)}&class=${classType}&tripType=${tripType}`);
+            if (!response.ok) throw new Error('Failed to fetch flight data');
+            const data = await response.json();
+            console.log('Fetched flight data:', data);
+            return data;
+        } catch (error) {
+            console.error('Error searching flights:', error);
+            throw error;
+        }
+    }
+
+    function updateResultsDisplay(results) {
         console.log(results);
         const container = document.getElementById('resultsContainer');
-        container.innerHTML = '';
-
+        container.innerHTML = ''; // Clear the container before adding new results
+    
+        // Ensure results have data and flightOffers exist
         if (results.status && results.data && results.data.flightOffers && Array.isArray(results.data.flightOffers)) {
             results.data.flightOffers.forEach(flight => {
-                const segments = flight.segments[0];
+                const segments = flight.segments[0]; // Verify if this is correct
                 const departureAirport = segments.departureAirport.code;
                 const arrivalAirport = segments.arrivalAirport.code;
                 const price = flight.priceBreakdown.total.units;
@@ -160,24 +145,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 const duration = formatDuration(segments.totalTime);
                 const airlineName = segments.legs[0].carriersData[0].name;
                 const layovers = segments.legs[0].flightStops;
-
+    
+                // Create a card for each flight result
                 const card = document.createElement('section');
                 card.classList.add('cardsection');
-
+    
                 const detailsContainer = document.createElement('div');
                 detailsContainer.classList.add('detailsContainer');
-
+    
                 const bookingContainer = document.createElement('div');
                 bookingContainer.classList.add('bookingContainer');
-
+    
                 const airlineInfoContainer = document.createElement('div');
                 airlineInfoContainer.classList.add("airlineInfoContainer");
-
+    
                 const airfareElement = document.createElement('div');
                 airfareElement.classList.add("airfairprice");
                 airfareElement.textContent = "$ " + price;
                 bookingContainer.appendChild(airfareElement);
-
+    
                 const saveButton = document.createElement('button');
                 saveButton.classList.add('saveButton');
                 saveButton.textContent = 'Save Flight';
@@ -202,46 +188,46 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 });
                 bookingContainer.appendChild(saveButton);
-
+    
                 const airlineCodeElement = document.createElement('div');
                 airlineCodeElement.classList.add("airlineCode");
                 airlineCodeElement.textContent = airlineName;
                 airlineInfoContainer.appendChild(airlineCodeElement);
-
+    
                 const layOversElement = document.createElement('div');
                 layOversElement.classList.add("layOvers");
                 layOversElement.textContent = `Layovers: ${layovers}`;
                 airlineInfoContainer.appendChild(layOversElement);
-
+    
                 detailsContainer.appendChild(airlineInfoContainer);
-
+    
                 const travelInfoContainer = document.createElement('div');
                 travelInfoContainer.classList.add('travelInfoContainer');
-
+    
                 const departureAirportElement = document.createElement('div');
                 departureAirportElement.classList.add('departAirport');
                 departureAirportElement.innerHTML = `${departureAirport}<br><span class='time'>${departureTime}</span>`;
                 travelInfoContainer.appendChild(departureAirportElement);
-
+    
                 const separator = document.createElement('span');
                 separator.textContent = ' -------------------- ';
                 travelInfoContainer.appendChild(separator);
-
+    
                 const arrivalAirportElement = document.createElement('div');
                 arrivalAirportElement.classList.add('arrivalAirport');
                 arrivalAirportElement.innerHTML = `${arrivalAirport}<br><span class='time'>${arrivalTime}</span>`;
                 travelInfoContainer.appendChild(arrivalAirportElement);
-
+    
                 const flightDurationElement = document.createElement('div');
                 flightDurationElement.classList.add('flightDuration');
                 flightDurationElement.textContent = `Duration: ${duration}`;
                 travelInfoContainer.appendChild(flightDurationElement);
-
+    
                 detailsContainer.appendChild(travelInfoContainer);
-
+    
                 card.appendChild(detailsContainer);
                 card.appendChild(bookingContainer);
-
+    
                 container.appendChild(card);
             });
         } else {
@@ -456,6 +442,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     document.querySelector(".search-btn").addEventListener("click", Searchengine);
+
     function Searchengine() {
         const searchData = {
             tripType: document.getElementById('trip-type').value,
@@ -471,19 +458,26 @@ document.addEventListener('DOMContentLoaded', function() {
             class: document.getElementById('class').value
         };
 
-        GetAirportIDfromcity(searchData.fromCity).then(function(fromID) {
-            GetAirportIDfromcity(searchData.toCity).then(function(toID) {
+        console.log("Search parameters:", searchData);
+
+        getAirportIDFromCity(searchData.fromCity).then(function(fromID) {
+            getAirportIDFromCity(searchData.toCity).then(function(toID) {
+                console.log(`Searching flights from ${fromID} to ${toID} on ${searchData.departDate}`);
                 if (searchData.tripType === 'roundtrip') {
-                    SearchflightAPI(fromID, toID, searchData.departDate, 'outbound')
+                    searchFlights(fromID, toID, searchData.departDate, searchData.passengers, searchData.class, 'outbound')
                         .then(() => {
                             if (searchData.returnDate) {
-                                SearchflightAPI(toID, fromID, searchData.returnDate, 'inbound');
+                                searchFlights(toID, fromID, searchData.returnDate, searchData.passengers, searchData.class, 'inbound');
                             }
                         });
                 } else if (searchData.tripType === 'multicity') {
                     handleMultiCitySearch(searchData);
                 } else {
-                    SearchflightAPI(fromID, toID, searchData.departDate);
+                    searchFlights(fromID, toID, searchData.departDate, searchData.passengers, searchData.class, 'oneway')
+                        .then(flightResults => {
+                            console.log("Search results:", flightResults);
+                            updateResultsDisplay(flightResults, searchData.fromCity, searchData.toCity, searchData.departDate, searchData.passengers, searchData.class);
+                        });
                 }
             }).catch(error => {
                 console.error('Error getting destination airport ID:', error);
@@ -508,7 +502,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (direction === 'outbound') {
             selectedOutboundFlight = flightData;
             clearFlightDisplay();
-            SearchflightAPI(flightData.toID, flightData.fromID, searchData.returnDate, 'inbound');
+            searchFlights(flightData.toID, flightData.fromID, searchData.returnDate, searchData.passengers, searchData.class, 'inbound');
         } else if (direction === 'inbound') {
             const referenceNumber = Math.floor(Math.random() * 10000000000);
             alert(`Enjoy your journey! Your flight is booked, and here is your reference number: ${referenceNumber}`);
@@ -523,200 +517,14 @@ document.addEventListener('DOMContentLoaded', function() {
         contentPanel.innerHTML = '';
     }
 
-    function GetAirportIDfromcity(city) {
-        const url = 'https://booking-com15.p.rapidapi.com/api/v1/flights/searchDestination?query=' + city;
-        var options = {
-            method: 'GET',
-            headers: {
-                'X-RapidAPI-Key': '8d3728dcaemsh32efdac6013419ap12f34bjsned7b35d9a858',
-                'X-RapidAPI-Host': 'booking-com15.p.rapidapi.com'
-            }
-        };
-
-        return fetch(url, options)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data);
-                return data.data[0].id;
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-            });
+    function showSidebar(event) {
+        event.preventDefault();
+        const sidebar = document.querySelector("#sidebar");
+        sidebar.style.display = "flex";
     }
 
-    function SearchflightAPI(toID, fromID, departDate) {
-        const url = `https://booking-com15.p.rapidapi.com/api/v1/flights/searchFlights?fromId=${fromID}&toId=${toID}&departDate=${departDate}`;
-        const options = {
-            method: 'GET',
-            headers: {
-                'X-RapidAPI-Key': '8d3728dcaemsh32efdac6013419ap12f34bjsned7b35d9a858',
-                'X-RapidAPI-Host': 'booking-com15.p.rapidapi.com'
-            }
-        };
-
-        return fetch(url, options)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-
-                data.data.flightOffers.sort((a, b) => {
-                    const priceComparison = a.priceBreakdown.total.units - b.priceBreakdown.total.units;
-                    if (priceComparison !== 0) {
-                        return priceComparison;
-                    }
-                    return a.segments[0].totalTime - b.segments[0].totalTime;
-                });
-
-                const contentPanel = document.querySelector('.content-panel');
-                contentPanel.innerHTML = '';
-
-                data.data.flightOffers.forEach(item => {
-                    if (currentImageIndex === imageArray.length) {
-                        currentImageIndex = 0;
-                    }
-
-                    const card = document.createElement('section');
-                    card.classList.add('cardsection');
-                    const imageContainer = document.createElement('div');
-                    imageContainer.classList.add('imageContainer');
-                    const detailsContainer = document.createElement('div');
-                    detailsContainer.classList.add('detailsContainer');
-                    const bookingContainer = document.createElement('div');
-                    bookingContainer.classList.add('bookingContainer');
-                    const airlineInfoContainer = document.createElement('div');
-                    airlineInfoContainer.classList.add("airlineInfoContainer");
-
-                    const Airfare = item.priceBreakdown.total.units;
-                    const AirefareElement = document.createElement('div');
-                    AirefareElement.classList.add("airfairprice");
-                    AirefareElement.textContent = "$ " + Airfare;
-                    bookingContainer.appendChild(AirefareElement);
-
-                    const bookButton = document.createElement('button');
-                    bookButton.classList.add('bookButton');
-                    bookButton.textContent = 'Book Now';
-                    bookButton.addEventListener('click', function() {
-                        bookFlight(item, 'inbound');
-                    });
-
-                    bookingContainer.appendChild(bookButton);
-
-                    const saveButton = document.createElement('button');
-                    saveButton.classList.add('saveButton');
-                    saveButton.innerHTML = '&#9825;';
-                    saveButton.addEventListener('click', function() {
-                        let savedFlights = localStorage.getItem('savedFlights');
-                        savedFlights = savedFlights ? JSON.parse(savedFlights) : [];
-
-                        if (!savedFlights.some(flight => flight.id === item.id)) {
-                            saveFlightOption(item);
-                            this.innerHTML = '&#9829;';
-                            this.classList.add('saved');
-                        } else {
-                            savedFlights = savedFlights.filter(flight => flight.id !== item.id);
-                            localStorage.setItem('savedFlights', JSON.stringify(savedFlights));
-                            this.innerHTML = '&#9825;';
-                            this.classList.remove('saved');
-                        }
-                    });
-
-                    bookingContainer.appendChild(saveButton);
-
-                    const airlineLogo = item.segments[0].legs[0].carriersData[0].logo;
-                    const airlineLogoElement = document.createElement('img');
-                    airlineLogoElement.classList.add("airlineLogo");
-                    airlineLogoElement.src = `${airlineLogo}`;
-                    airlineInfoContainer.appendChild(airlineLogoElement);
-
-                    const airlineCode = item.segments[0].legs[0].carriersData[0].name;
-                    const airlineCodeElement = document.createElement('div');
-                    airlineCodeElement.classList.add("airlineCode");
-                    airlineCodeElement.textContent = ` ${airlineCode}`;
-                    airlineInfoContainer.appendChild(airlineCodeElement);
-
-                    const layOvers = item.segments[0].legs[0].flightStops;
-                    const layOversElement = document.createElement('div');
-                    layOversElement.classList.add("layOvers");
-                    layOversElement.textContent = ` ${layOvers}`;
-                    airlineInfoContainer.appendChild(layOversElement);
-                    console.log(layOvers);
-
-                    detailsContainer.appendChild(airlineInfoContainer);
-
-                    const cardImg = imageArray[currentImageIndex];
-                    const cardImgElement = document.createElement('img');
-                    cardImgElement.classList.add("cardImg");
-                    cardImgElement.src = ` ${cardImg}`;
-                    imageContainer.appendChild(cardImgElement);
-
-                    const travelInfoContainer = document.createElement('div');
-                    travelInfoContainer.classList.add('travelInfoContainer');
-
-                    const departTime = new Date(item.segments[0].departureTime);
-                    const arrivalTime = new Date(item.segments[0].arrivalTime);
-                    const options = {
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        hour12: true
-                    };
-                    const formattedDepartTime = departTime.toLocaleTimeString('en-US', options);
-                    const formattedArrivalTime = arrivalTime.toLocaleTimeString('en-US', options);
-
-                    const departAirport = item.segments[0].departureAirport.code;
-                    const departureAirportElement = document.createElement('div');
-                    departureAirportElement.classList.add('departAirport');
-                    departureAirportElement.innerHTML = `${departAirport}<br><span class='time'>${formattedDepartTime}</span>`;
-                    travelInfoContainer.appendChild(departureAirportElement);
-
-                    const separator = document.createElement('span');
-                    separator.textContent = ' -------------------- ';
-                    travelInfoContainer.appendChild(separator);
-
-                    const arrivalAirport = item.segments[0].arrivalAirport.code;
-                    const arrivalAirportElement = document.createElement('div');
-                    arrivalAirportElement.classList.add('arrivalAirport');
-                    arrivalAirportElement.innerHTML = `${arrivalAirport}<br><span class='time'>${formattedArrivalTime}</span>`;
-                    travelInfoContainer.appendChild(arrivalAirportElement);
-
-                    const flightDuration = formatDuration(item.segments[0].totalTime);
-                    const flightDurationElement = document.createElement('div');
-                    flightDurationElement.classList.add('flightDuration');
-                    flightDurationElement.textContent = flightDuration;
-                    travelInfoContainer.appendChild(flightDurationElement);
-
-                    detailsContainer.appendChild(travelInfoContainer);
-
-                    card.appendChild(imageContainer);
-                    card.appendChild(detailsContainer);
-                    card.appendChild(bookingContainer);
-
-                    contentPanel.appendChild(card);
-                    currentImageIndex++;
-                });
-
-                if (contentPanel) {
-                    contentPanel.style.backgroundImage = 'none';
-                    document.body.style.backgroundImage = 'none';
-                }
-            })
-            .catch(error => {
-                console.error('There was an issue fetching flight data:', error);
-            });
+    function hideSidebar() {
+        const sidebar = document.querySelector("#sidebar");
+        sidebar.style.display = "none";
     }
 });
-
-function showSidebar() {
-    event.preventDefault();
-    const sidebar = document.querySelector("#sidebar");
-    sidebar.style.display = "flex";
-}
-
-function hideSidebar() {
-    const sidebar = document.querySelector("#sidebar");
-    sidebar.style.display = "none";
-}
