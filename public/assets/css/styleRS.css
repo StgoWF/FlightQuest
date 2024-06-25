@@ -1,296 +1,201 @@
-* {
-    /* Removing default margin and padding */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
     margin: 0;
     padding: 0;
 }
 
-body {
-    height: 100vh;
-    background-image: url("../images/background2.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body > header {
-    /* Your existing styles for the header */
-    top: 0px;
-    left: 1px;
-    border-bottom: 1px solid #f0f0f0;
-    box-sizing: border-box;
-    padding: 10px 20px; /* Padding for better spacing */
-    height: auto;
-}
-
-button {
-    background: none;
-    border: none;
-}
-
-/* Logo styles, assuming the logo is inline with other elements and not absolutely positioned */
-.logo-and-icon {
-    display: flex; /* Enables flexbox layout */
-    align-items: center; /* Align logo text and icon vertically */
-    gap: 5px;
-}
-
-span.text.logo-text {
-    font-size: 25px;
-}
-
-/* Nav styling */
-nav {
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
-}
-
-nav ul {
-    width: 100%;
-    list-style: none;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-nav li {
-    height: 50px;
-}
-
-nav a {
-    height: 100%;
-    padding: 0 30px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    color: black;
-    text-align: start;
-}
-
-nav a:hover {
-    background-color: #f0f0f0;
-}
-
-nav li:first-child {
-    margin-right: auto;
-    font-size: 16px;
-    padding: 0px 30px;
-}
-
-.sidebar {
-    position: fixed;
-    display: none;
-    top: 0;
-    right: 0;
-    height: 100vh;
-    width: 250px;
-    z-index: 999;
-    background-color: white;
-    backdrop-filter: blur(10px);
-    box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    display: none;
-}
-
-.sidebar li {
-    width: 100%;
-}
-
-.sidebar a {
-    width: 100%;
-}
- 
-/* Hiding menu button - should only pop up on smaller screens */
-.menu_button {
-    display: none;
-}
-
-/* Hides horizontal navbar links when less than 950px */
-@media(max-width: 768x) {
-    .menu_button {
-        display: block;
-    }
-    .hideMobile {
-        display: none;
-    }
-}
-/* sidebar takes up 100% when less than 400px */
-@media(max-width: 800px) {
-    .sidebar {
-        width: 100%;
-    }
-}
-
-/* Styling for flight search section/filter */
-
-/* New Flex Container */
 .wrapper {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: auto;
+    background-color: #eae6ff;
 }
-
-/* Styling for the container holding the search form */
-#search-form-container {
-    top: 95px;
-    left: 0;
-    bottom: 0; /* Make the box occupy the full height of the page */
-    width: 300px; /* Width of the box */
-    background-color: #f0f0f0;
+.search-panel {
+    width: 100%;
+    background-color: #ffffff;
     padding: 20px;
-    box-sizing: border-box;
-    overflow-y: auto; /* Enable vertical scrolling if content overflows */
-    display: flex;
-    flex-direction: column; /* Display items stacked vertically */
-    flex: 1;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
-/* Styling for the content inside the box */
-#search-form {
-    display: flex;
-    flex-direction: column; /* Display items stacked vertically */
-    gap: 24px; /* Spacing between elements */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group input,
+.input-group select,
+.passenger-btn {
+    width: 100%;
     padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
-#search-form button {
-    width: 100%; /* Use full width of the box */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-#search-form button {
-    background-color: papayawhip;
-    color: #000;
+.search-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
     cursor: pointer;
 }
-#search-form button:hover {
-    background-color: papayawhip;
+
+.search-btn:hover {
+    background-color: #0056b3;
 }
 
-/* Popular Destinations Section */
-
-#popular-destinations-section h2 {
-    font-size: 2em;
-    margin: 5px;
-}
-
-/* Container for the destination cards to align them in a column */
-#popular-destinations-section {
-    display: flex;
-    flex-direction: column; /* Stacks cards vertically */
-    align-items: center; /* Center cards horizontally */
-    padding: 20px;
-    flex: 1;
-
-    /* Remove max-width if you want the container to be full-width */
-}
-
-/* Container for cards */
-.destinations-container, #search-results {
-    display: flex;
-    justify-content: space-around; /* Evenly distributes cards with space around them */
-    flex-wrap: wrap; /* Allows cards to wrap to the next line */
-}
-
-img.destination {
-    height: 168px;
-    width: 300px;
-}
-.card, #search-results .card  {
-    /* width: 996px;
-    height: 234px; */
-    background-color: #e9f2f0;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    align-self: center;
-}
-
-/* Hide popular section on mobile */
-
-@media (max-width: 1000px) {
-    #hideSection {
-        display: none;
-    }
-    .search-container {
-        width: 100%;
-        height: 100vh;
-    }
-    img.destination {
-        height: 84px;
-        width: 150px;
-    }
-}
-
-@media (max-width: 380px) {
-    img.destination {
-        height: 42px;
-        width: 75px;
-    }
-}
-
-/* Footer Styling */
-body > footer {
-    flex-shrink: 0; /* Prevents the footer from shrinking smaller than its content */
-    width: 100%; /* Makes the footer take full width of the page */
-    /* Your existing zstyles for the footer */
-}
-
-footer > * {
-    background-color: papayawhip;
-    text-align: center;
-}
-
-.footerContainer {
+.content-panel {
     width: 100%;
-    padding: 40px 25px 15px;
 }
 
-.socialMedia {
-    display: flex;
-    justify-content: center;
-}
-
-.socialMedia a {
-    text-decoration: none;
-    padding: 10px;
+.cardsection {
     background-color: white;
-    margin: 10px;
-    border-radius: 50%;
-}
-
-.socialMedia a i {
-    font-size: 2em;
-    color: #00c4bb;
-    opacity: 0.9;
-}
-
-.socialMedia a:hover {
-    background-color: black;
-    transition: 1s;
-}
-
-.footerNav {
-    margin: 25px 0;
-
-}
-
-.footerNav ul {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
-    justify-content: center;
-    list-style-type: none;
-}
-.footerNav ul li {
-    margin: 10px;
-    font-size: 1em;
-    opacity: 0.5;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.footerNav ul li a {
-    text-decoration: none;
+.detailsContainer {
+    display: flex;
+    flex-direction: column;
 }
+
+.bookingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.airlineInfoContainer,
+.travelInfoContainer {
+    margin-bottom: 10px;
+}
+
+.airfairprice {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.saveButton {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.saveButton:hover {
+    background-color: #0056b3;
+}
+
+
+/* Estilos generales para las cards */
+.cardsection {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    box-sizing: border-box;
+    color: rgb(22, 22, 22);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    font-family: "Skyscanner Relative", -apple-system, "system-ui", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-size: 16px;
+    height: auto;
+    line-height: 1.3;
+    margin-bottom: 16px;
+    padding: 16px;
+    text-align: center;
+    text-size-adjust: 100%;
+    unicode-bidi: isolate;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 4p
+  }
+  
+  /* Contenedor de detalles del vuelo */
+  .detailsContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  
+  /* Contenedor de información de la aerolínea */
+  .airlineInfoContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 8px;
+  }
+  
+  /* Elemento de la tarifa aérea */
+  .airfairprice {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  /* Botón para guardar el vuelo */
+  .saveButton {
+    background-color: #1a73e8; /* Azul similar al de Skyscanner */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .saveButton:hover {
+    background-color: #1558b0;
+  }
+  
+  /* Información del aeropuerto de salida y llegada */
+  .departAirport,
+  .arrivalAirport {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  
+  /* Contenedor de información de viaje */
+  .travelInfoContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  
+  /* Elemento de duración del vuelo */
+  .flightDuration {
+    font-size: 14px;
+    font-weight: normal;
+  }
+  
+  /* Separator styling */
+  .travelInfoContainer span.separator {
+    flex-grow: 1;
+    margin: 0 10px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  

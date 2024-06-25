@@ -1,12 +1,13 @@
+// Modal popup for Hawaii
 const logoButton = document.querySelector('#hawaiiPopUp');
-if (logoButton) {
+const modal = document.querySelector('.modal');
+const modalBG = document.querySelector('.modal-background');
+
+if (logoButton && modal) {
     logoButton.addEventListener('click', function() {
         modal.classList.add('is-active');
     });
 }
-
-const modalBG = document.querySelector('.modal-background');
-const modal = document.querySelector('.modal');
 
 if (modalBG && modal) {
     modalBG.addEventListener('click', function() {
@@ -14,14 +15,18 @@ if (modalBG && modal) {
     });
 }
 
-// sideBar function 
-
-function showSidebar() {
+// Sidebar functions
+function showSidebar(event) {
     event.preventDefault();
-    const sidebar = document.querySelector(".sidebar")
-    sidebar.style.display = "flex"
+    const sidebar = document.querySelector("#sidebar"); // Ensure the correct selector
+    if (sidebar) {
+        sidebar.style.display = "flex";
+    }
 }
+
 function hideSidebar() {
-    const sidebar = document.querySelector(".sidebar")
-    sidebar.style.display = "none"
+    const sidebar = document.querySelector("#sidebar"); // Ensure the correct selector
+    if (sidebar) {
+        sidebar.style.display = "none";
+    }
 }

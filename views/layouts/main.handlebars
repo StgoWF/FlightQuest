@@ -11,7 +11,7 @@
         <h1>FlightQuest</h1>
         <nav id="nav">    
             <ul id="sidebar" class="nav_links">
-                <li onclick=hideSidebar()><a href=""><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
+                <li onclick="hideSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
                 <li><a href="/">Home</a></li>
                 {{#if logged_in}}
                 <li><a href="/saved-flights">Saved Flights</a></li>
@@ -28,13 +28,29 @@
                 {{else}}
                 <li class="hideMobile"><a href="/login">Login</a></li>
                 {{/if}}
-                <li class="menu_button" onclick=showSidebar()><a href=""><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
+                <li class="menu_button" onclick="showSidebar(event)"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
             </ul>
         </nav>
-        
     </header>
 
+    <div class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <!-- Modal content here -->
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+
     {{{body}}}
+
+    <footer>
+        <p>&copy; 2024 FlightQuest. All Rights Reserved.</p>
+        <p>
+            <a href="/privacy-policy">Privacy Policy</a> |
+            <a href="/terms-of-service">Terms of Service</a> |
+            <a href="/contact">Contact Us</a>
+        </p>
+    </footer>
 
     <script src="/assets/js/script.js"></script>
     <script src="/assets/js/modal.js"></script>

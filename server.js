@@ -67,6 +67,14 @@ app.get('/', (req, res) => {
     res.render('search', { logged_in: req.session.logged_in });
 });
 
+app.get('/login', (req, res) => {
+    res.render('login', { isLogin: true });
+});
+
+app.get('*', (req, res) => {
+    res.render('main', { isLogin: false });
+});
+
 sequelize.sync({ force: false }).then(() => {
     console.log('Database tables created or updated!');
     app.listen(PORT, async () => {

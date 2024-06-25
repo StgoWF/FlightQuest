@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(results);
         const container = document.getElementById('resultsContainer');
         container.innerHTML = ''; // Clear the container before adding new results
-    
+        
         // Ensure results have data and flightOffers exist
         if (results.status && results.data && results.data.flightOffers && Array.isArray(results.data.flightOffers)) {
             results.data.flightOffers.forEach(flight => {
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const arrivalTime = new Date(segments.arrivalTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
                 const duration = formatDuration(segments.totalTime);
                 const airlineName = segments.legs[0].carriersData[0].name;
-                const layovers = segments.legs[0].flightStops;
+                const layovers = segments.legs[0].flightStops.join(', ');
     
                 // Create a card for each flight result
                 const card = document.createElement('section');
@@ -153,49 +153,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 const detailsContainer = document.createElement('div');
                 detailsContainer.classList.add('detailsContainer');
     
-                const bookingContainer = document.createElement('div');
-                bookingContainer.classList.add('bookingContainer');
-    
                 const airlineInfoContainer = document.createElement('div');
-                airlineInfoContainer.classList.add("airlineInfoContainer");
-    
-                const airfareElement = document.createElement('div');
-                airfareElement.classList.add("airfairprice");
-                airfareElement.textContent = "$ " + price;
-                bookingContainer.appendChild(airfareElement);
-    
-                const saveButton = document.createElement('button');
-                saveButton.classList.add('saveButton');
-                saveButton.textContent = 'Save Flight';
-                saveButton.addEventListener('click', function() {
-                    const isLoggedIn = document.body.getAttribute('data-logged-in') === 'true';
-                    if (!isLoggedIn) {
-                        window.location.href = '/login';
-                        return;
-                    }
-                    saveFlightOption({
-                        fromCity,
-                        toCity,
-                        departDate,
-                        returnDate: null,
-                        passengersAdults: passengerCounts.adults,
-                        passengersChildren: passengerCounts.children,
-                        passengersInfants: passengerCounts.infants,
-                        travelClass: classType,
-                        airlineCode: airlineName,
-                        flightDuration: duration,
-                        price
-                    });
-                });
-                bookingContainer.appendChild(saveButton);
+                airlineInfoContainer.classList.add('airlineInfoContainer');
     
                 const airlineCodeElement = document.createElement('div');
-                airlineCodeElement.classList.add("airlineCode");
+                airlineCodeElement.classList.add('airlineCode');
                 airlineCodeElement.textContent = airlineName;
                 airlineInfoContainer.appendChild(airlineCodeElement);
     
                 const layOversElement = document.createElement('div');
-                layOversElement.classList.add("layOvers");
+                layOversElement.classList.add('layOvers');
                 layOversElement.textContent = `Layovers: ${layovers}`;
                 airlineInfoContainer.appendChild(layOversElement);
     
@@ -210,7 +177,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 travelInfoContainer.appendChild(departureAirportElement);
     
                 const separator = document.createElement('span');
-                separator.textContent = ' -------------------- ';
+                separator.classList.add('separator');
+                separator.textContent = '--------------------';
                 travelInfoContainer.appendChild(separator);
     
                 const arrivalAirportElement = document.createElement('div');
@@ -218,12 +186,45 @@ document.addEventListener('DOMContentLoaded', function() {
                 arrivalAirportElement.innerHTML = `${arrivalAirport}<br><span class='time'>${arrivalTime}</span>`;
                 travelInfoContainer.appendChild(arrivalAirportElement);
     
+                detailsContainer.appendChild(travelInfoContainer);
+    
                 const flightDurationElement = document.createElement('div');
                 flightDurationElement.classList.add('flightDuration');
                 flightDurationElement.textContent = `Duration: ${duration}`;
-                travelInfoContainer.appendChild(flightDurationElement);
+                detailsContainer.appendChild(flightDurationElement);
     
-                detailsContainer.appendChild(travelInfoContainer);
+                const bookingContainer = document.createElement('div');
+                bookingContainer.classList.add('bookingContainer');
+    
+                const airfareElement = document.createElement('div');
+                airfareElement.classList.add('airfairprice');
+                airfareElement.textContent = "$ " + price;
+                bookingContainer.appendChild(airfareElement);
+    
+                const saveButton = document.createElement('button');
+                saveButton.classList.add('saveButton');
+                saveButton.textContent = 'Save Flight';
+                saveButton.addEventListener('click', function() {
+                    const isLoggedIn = document.body.getAttribute('data-logged-in') === 'true';
+                    if (!isLoggedIn) {
+                        window.location.href = '/login';
+                        return;
+                    }
+                    saveFlightOption({
+                        fromCity: segments.departureAirport.city,
+                        toCity: segments.arrivalAirport.city,
+                        departDate: segments.departureTime.split('T')[0],
+                        returnDate: null,
+                        passengersAdults: 1,  // This should be dynamically set
+                        passengersChildren: 0,  // This should be dynamically set
+                        passengersInfants: 0,  // This should be dynamically set
+                        travelClass: 'Economy',  // This should be dynamically set
+                        airlineCode: airlineName,
+                        flightDuration: duration,
+                        price
+                    });
+                });
+                bookingContainer.appendChild(saveButton);
     
                 card.appendChild(detailsContainer);
                 card.appendChild(bookingContainer);
@@ -234,6 +235,8 @@ document.addEventListener('DOMContentLoaded', function() {
             container.innerHTML = 'No flight results found.';
         }
     }
+    
+    
 
     function formatDuration(seconds) {
         const hours = Math.floor(seconds / 3600);

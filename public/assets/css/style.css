@@ -1,11 +1,193 @@
+/* General styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: auto;
+    background-color: #eae6ff;
+    flex: 1;
+}
+
+.search-panel {
+    display: flex;
+    flex-wrap: wrap;
+    width: 94%;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.search-panel h2 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input-group-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    width: calc(33.333% - 10px);
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    margin-bottom: 5px;
+}
+
+.input-group input,
+.input-group select,
+.passenger-btn {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.search-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: darkslateblue;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.search-btn:hover {
+    background-color: #0056b3;
+}
+
+.content-panel {
+    width: 90%;
+}
+
+.cardsection {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 20px;
+    width: calc(100% - 40px);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.detailsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 70%;
+}
+
+.bookingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 30%;
+}
+
+.airlineInfoContainer {
+    margin-bottom: 10px;
+}
+
+.airlineCode {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.layOvers {
+    font-size: 14px;
+    color: #555;
+}
+
+.travelInfoContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.departAirport,
+.arrivalAirport {
+    text-align: center;
+    flex: 1;
+}
+
+.departAirport .time,
+.arrivalAirport .time {
+    display: block;
+    font-size: 14px;
+    color: #777;
+}
+
+.separator {
+    flex-grow: 1;
+    text-align: center;
+    color: #555;
+    font-size: 14px;
+    padding: 0 10px;
+}
+
+.flightDuration {
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+}
+
+.airfairprice {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+.saveButton {
+    background-color: darkslateblue;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: auto;
+}
+
+.saveButton:hover {
+    background-color: #3a0069; /* Darker shade */
+}
+
 * {
     margin: 0;
     top: 0;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 body {
     height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
@@ -17,16 +199,19 @@ header {
     align-items: center;
 }
 
-.nav_links{
+.nav_links {
     list-style: none;
 }
-.nav_links li{
+
+.nav_links li {
     padding: 0 15px;
 }
-.nav_links li a{
+
+.nav_links li a {
     transition: all 0.3s ease 0s;
 }
-.nav_links li a:hover{
+
+.nav_links li a:hover {
     color: #0088a9;
 }
 
@@ -61,6 +246,7 @@ header nav li a {
 main {
     padding: 2rem;
     text-align: center;
+    flex: 1;
 }
 
 .intro {
@@ -95,7 +281,7 @@ main {
     font-weight: bold;
 }
 
-.booking-form input, 
+.booking-form input,
 .booking-form button {
     padding: 0.5rem;
     font-size: 1rem;
@@ -104,7 +290,7 @@ main {
 }
 
 .booking-form button {
-    background-color: #007bff;
+    background-color: darkslateblue;
     color: white;
     border: none;
     cursor: pointer;
@@ -116,50 +302,38 @@ main {
 }
 
 footer {
-    background-color: #007bff;
+    background-color: darkslateblue;
     color: white;
     text-align: center;
     padding: 1rem 0;
-    position: fixed;
+    position: relative;
     width: 100%;
-    bottom: 0;
 }
 
 footer p {
     margin: 0;
 }
 
-
-
-
-@media (max-width: 600px) {
-    body {
-        padding: 1rem;
-    }
-    .login-form {
-        padding: 1.5rem;
-    }
-    .login-title {
-        font-size: 1.5rem;
-    }
-    .login-form form {
-        gap: 0.5rem;
-    }
-    .login-form input, 
-    .login-form button {
-        font-size: 0.9rem;
-        padding: 0.4rem;
-    }
+footer a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
 }
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Sidebar and navigation */
 #sidebar {
     position: fixed;
     display: none;
     top: 0;
     right: 0;
-    height: 100vh;
-    width: 250px;
+    height: 17vh;
+    width: calc(30% - 89px);
     z-index: 999;
-    background-color: #999;
+    background-color: darkslateblue;
     backdrop-filter: blur(10px);
     box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
     flex-direction: column;
@@ -179,19 +353,86 @@ footer p {
 .menu_button {
     display: none;
 }
-/* Hides horizontal navbar links when less than 950px */
-@media(max-width: 1020px) {
+
+@media (max-width: 1020px) {
     .menu_button {
         display: block;
     }
+
     .hideMobile {
         display: none;
     }
-}
-/* sidebar takes up 100% when less than 400px */
-@media(max-width: 800px) {
-    #sidebar {
-        width: 100%;
+    header nav li {
+        display: inline-block;
+        margin-inline-end: 25px;
+        font-size: 25px;
     }
 }
 
+
+
+/* Search panel styles */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.search-panel {
+    width: 94%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-panel h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    margin-bottom: 5px;
+}
+
+.input-group input,
+.input-group select,
+.input-group button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.search-btn {
+    background-color: darkslateblue;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+/* Search results styles */
+#resultsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+@media (max-width: 400px) {
+    .input-group {
+        width: calc(50% - 10px);
+
+    }
+    .cardsection{
+        width: 100%;
+    }
+}
