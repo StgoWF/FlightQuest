@@ -1,4 +1,4 @@
-* { 
+* {
     margin: 0;
     padding: 0;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
@@ -12,6 +12,12 @@ body {
     position: relative;
 }
 
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
 .saved-flights-container {
     margin-top: 20px;
     text-align: center;
@@ -20,20 +26,74 @@ body {
 }
 
 .cardFlights {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin: auto;
+    padding: 0;
+    width: 100%;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 92%;
+    margin: 20px 0;
+    padding: 20px;
+}
+
+.card h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
 }
 
 .savedFlights {
-    background-color: lightgray;
+    background-color: #f9f9f9;
     border-radius: 7px;
-    max-width: 500px;
-    margin: auto;
+    margin-bottom: 20px;
+    padding: 15px;
     list-style-type: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.savedFlights:hover {
+    background-color: #f1f1f1;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.savedFlights p {
+    margin: 5px 0;
+}
+
+.break {
+    height: 20px;
+}
+
+.delete-button, .update-button {
+    background-color: #4b0082; /* DarkSlateBlue */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.delete-button:hover, .update-button:hover {
+    background-color: #3a0069; /* Darker shade */
 }
 
 @media(max-width: 900px) {
-    .cardFlights {
-        width: 100%;
-        margin: auto;
+    .card {
+        width: 90%;
     }
 }
