@@ -128,115 +128,123 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function updateResultsDisplay(results) {
-        console.log(results);
+    function createCard(flight, isReturn) {
+        const segments = flight.segments[0]; // Verify if this is correct
+        const departureAirport = segments.departureAirport.code;
+        const arrivalAirport = segments.arrivalAirport.code;
+        const price = flight.priceBreakdown.total.units;
+        const departureTime = new Date(segments.departureTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+        const arrivalTime = new Date(segments.arrivalTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+        const duration = formatDuration(segments.totalTime);
+        const airlineName = segments.legs[0].carriersData[0].name;
+        const layovers = segments.legs[0].flightStops.join(', ');
+
+        const card = document.createElement('section');
+        card.classList.add('cardsection');
+
+        const detailsContainer = document.createElement('div');
+        detailsContainer.classList.add('detailsContainer');
+
+        const airlineInfoContainer = document.createElement('div');
+        airlineInfoContainer.classList.add('airlineInfoContainer');
+
+        const airlineCodeElement = document.createElement('div');
+        airlineCodeElement.classList.add('airlineCode');
+        airlineCodeElement.textContent = airlineName;
+        airlineInfoContainer.appendChild(airlineCodeElement);
+
+        const layOversElement = document.createElement('div');
+        layOversElement.classList.add('layOvers');
+        layOversElement.textContent = `Layovers: ${layovers}`;
+        airlineInfoContainer.appendChild(layOversElement);
+
+        detailsContainer.appendChild(airlineInfoContainer);
+
+        const travelInfoContainer = document.createElement('div');
+        travelInfoContainer.classList.add('travelInfoContainer');
+
+        const departureAirportElement = document.createElement('div');
+        departureAirportElement.classList.add('departAirport');
+        departureAirportElement.innerHTML = `${departureAirport}<br><span class='time'>${departureTime}</span>`;
+        travelInfoContainer.appendChild(departureAirportElement);
+
+        const separator = document.createElement('span');
+        separator.classList.add('separator');
+        separator.textContent = '--------------------';
+        travelInfoContainer.appendChild(separator);
+
+        const arrivalAirportElement = document.createElement('div');
+        arrivalAirportElement.classList.add('arrivalAirport');
+        arrivalAirportElement.innerHTML = `${arrivalAirport}<br><span class='time'>${arrivalTime}</span>`;
+        travelInfoContainer.appendChild(arrivalAirportElement);
+
+        detailsContainer.appendChild(travelInfoContainer);
+
+        const flightDurationElement = document.createElement('div');
+        flightDurationElement.classList.add('flightDuration');
+        flightDurationElement.textContent = `Duration: ${duration}`;
+        detailsContainer.appendChild(flightDurationElement);
+
+        const bookingContainer = document.createElement('div');
+        bookingContainer.classList.add('bookingContainer');
+
+        const airfareElement = document.createElement('div');
+        airfareElement.classList.add('airfairprice');
+        airfareElement.textContent = "$ " + price;
+        bookingContainer.appendChild(airfareElement);
+
+        const saveButton = document.createElement('button');
+        saveButton.classList.add('saveButton');
+        saveButton.textContent = 'Save Flight';
+        saveButton.addEventListener('click', function() {
+            const isLoggedIn = document.body.getAttribute('data-logged-in') === 'true';
+            if (!isLoggedIn) {
+                window.location.href = '/login';
+                return;
+            }
+            saveFlightOption({
+                fromCity: segments.departureAirport.city,
+                toCity: segments.arrivalAirport.city,
+                departDate: segments.departureTime.split('T')[0],
+                returnDate: null,
+                passengersAdults: 1,  // This should be dynamically set
+                passengersChildren: 0,  // This should be dynamically set
+                passengersInfants: 0,  // This should be dynamically set
+                travelClass: 'Economy',  // This should be dynamically set
+                airlineCode: airlineName,
+                flightDuration: duration,
+                price
+            });
+        });
+        bookingContainer.appendChild(saveButton);
+
+        card.appendChild(detailsContainer);
+        card.appendChild(bookingContainer);
+
+        return card;
+    }
+
+    function updateResultsDisplay(outboundResults, returnResults = null) {
+        console.log(outboundResults, returnResults);
         const container = document.getElementById('resultsContainer');
         container.innerHTML = ''; // Clear the container before adding new results
-        
-        // Ensure results have data and flightOffers exist
-        if (results.status && results.data && results.data.flightOffers && Array.isArray(results.data.flightOffers)) {
-            results.data.flightOffers.forEach(flight => {
-                const segments = flight.segments[0]; // Verify if this is correct
-                const departureAirport = segments.departureAirport.code;
-                const arrivalAirport = segments.arrivalAirport.code;
-                const price = flight.priceBreakdown.total.units;
-                const departureTime = new Date(segments.departureTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-                const arrivalTime = new Date(segments.arrivalTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-                const duration = formatDuration(segments.totalTime);
-                const airlineName = segments.legs[0].carriersData[0].name;
-                const layovers = segments.legs[0].flightStops.join(', ');
-    
-                // Create a card for each flight result
-                const card = document.createElement('section');
-                card.classList.add('cardsection');
-    
-                const detailsContainer = document.createElement('div');
-                detailsContainer.classList.add('detailsContainer');
-    
-                const airlineInfoContainer = document.createElement('div');
-                airlineInfoContainer.classList.add('airlineInfoContainer');
-    
-                const airlineCodeElement = document.createElement('div');
-                airlineCodeElement.classList.add('airlineCode');
-                airlineCodeElement.textContent = airlineName;
-                airlineInfoContainer.appendChild(airlineCodeElement);
-    
-                const layOversElement = document.createElement('div');
-                layOversElement.classList.add('layOvers');
-                layOversElement.textContent = `Layovers: ${layovers}`;
-                airlineInfoContainer.appendChild(layOversElement);
-    
-                detailsContainer.appendChild(airlineInfoContainer);
-    
-                const travelInfoContainer = document.createElement('div');
-                travelInfoContainer.classList.add('travelInfoContainer');
-    
-                const departureAirportElement = document.createElement('div');
-                departureAirportElement.classList.add('departAirport');
-                departureAirportElement.innerHTML = `${departureAirport}<br><span class='time'>${departureTime}</span>`;
-                travelInfoContainer.appendChild(departureAirportElement);
-    
-                const separator = document.createElement('span');
-                separator.classList.add('separator');
-                separator.textContent = '--------------------';
-                travelInfoContainer.appendChild(separator);
-    
-                const arrivalAirportElement = document.createElement('div');
-                arrivalAirportElement.classList.add('arrivalAirport');
-                arrivalAirportElement.innerHTML = `${arrivalAirport}<br><span class='time'>${arrivalTime}</span>`;
-                travelInfoContainer.appendChild(arrivalAirportElement);
-    
-                detailsContainer.appendChild(travelInfoContainer);
-    
-                const flightDurationElement = document.createElement('div');
-                flightDurationElement.classList.add('flightDuration');
-                flightDurationElement.textContent = `Duration: ${duration}`;
-                detailsContainer.appendChild(flightDurationElement);
-    
-                const bookingContainer = document.createElement('div');
-                bookingContainer.classList.add('bookingContainer');
-    
-                const airfareElement = document.createElement('div');
-                airfareElement.classList.add('airfairprice');
-                airfareElement.textContent = "$ " + price;
-                bookingContainer.appendChild(airfareElement);
-    
-                const saveButton = document.createElement('button');
-                saveButton.classList.add('saveButton');
-                saveButton.textContent = 'Save Flight';
-                saveButton.addEventListener('click', function() {
-                    const isLoggedIn = document.body.getAttribute('data-logged-in') === 'true';
-                    if (!isLoggedIn) {
-                        window.location.href = '/login';
-                        return;
-                    }
-                    saveFlightOption({
-                        fromCity: segments.departureAirport.city,
-                        toCity: segments.arrivalAirport.city,
-                        departDate: segments.departureTime.split('T')[0],
-                        returnDate: null,
-                        passengersAdults: 1,  // This should be dynamically set
-                        passengersChildren: 0,  // This should be dynamically set
-                        passengersInfants: 0,  // This should be dynamically set
-                        travelClass: 'Economy',  // This should be dynamically set
-                        airlineCode: airlineName,
-                        flightDuration: duration,
-                        price
-                    });
-                });
-                bookingContainer.appendChild(saveButton);
-    
-                card.appendChild(detailsContainer);
-                card.appendChild(bookingContainer);
-    
+
+        if (outboundResults.status && outboundResults.data && outboundResults.data.flightOffers && Array.isArray(outboundResults.data.flightOffers)) {
+            outboundResults.data.flightOffers.forEach(outboundFlight => {
+                const card = createCard(outboundFlight, false);
                 container.appendChild(card);
+
+                if (returnResults && returnResults.status && returnResults.data && returnResults.data.flightOffers && Array.isArray(returnResults.data.flightOffers)) {
+                    returnResults.data.flightOffers.forEach(returnFlight => {
+                        const returnCard = createCard(returnFlight, true);
+                        container.appendChild(returnCard);
+                    });
+                }
             });
         } else {
             container.innerHTML = 'No flight results found.';
         }
     }
-    
-    
 
     function formatDuration(seconds) {
         const hours = Math.floor(seconds / 3600);
@@ -468,9 +476,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log(`Searching flights from ${fromID} to ${toID} on ${searchData.departDate}`);
                 if (searchData.tripType === 'roundtrip') {
                     searchFlights(fromID, toID, searchData.departDate, searchData.passengers, searchData.class, 'outbound')
-                        .then(() => {
+                        .then(outboundResults => {
+                            console.log("Outbound results:", outboundResults);
                             if (searchData.returnDate) {
-                                searchFlights(toID, fromID, searchData.returnDate, searchData.passengers, searchData.class, 'inbound');
+                                searchFlights(toID, fromID, searchData.returnDate, searchData.passengers, searchData.class, 'inbound')
+                                    .then(inboundResults => {
+                                        console.log("Inbound results:", inboundResults);
+                                        updateResultsDisplay(outboundResults, inboundResults);
+                                    });
+                            } else {
+                                updateResultsDisplay(outboundResults);
                             }
                         });
                 } else if (searchData.tripType === 'multicity') {
@@ -479,7 +494,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     searchFlights(fromID, toID, searchData.departDate, searchData.passengers, searchData.class, 'oneway')
                         .then(flightResults => {
                             console.log("Search results:", flightResults);
-                            updateResultsDisplay(flightResults, searchData.fromCity, searchData.toCity, searchData.departDate, searchData.passengers, searchData.class);
+                            updateResultsDisplay(flightResults);
                         });
                 }
             }).catch(error => {

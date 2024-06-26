@@ -330,7 +330,7 @@ footer a:hover {
     display: none;
     top: 0;
     right: 0;
-    height: 17vh;
+    height: 22vh;
     width: calc(30% - 89px);
     z-index: 999;
     background-color: darkslateblue;
@@ -435,4 +435,8 @@ footer a:hover {
     .cardsection{
         width: 100%;
     }
+}
+
+#return-date {
+    width: 95%;
 }
